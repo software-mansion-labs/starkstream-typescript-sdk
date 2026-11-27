@@ -1,21 +1,21 @@
-import { ReloadIndexerRequest, runWithReconnect } from "@apibara/indexer";
-import { createAuthenticatedClient } from "@apibara/protocol";
+import { ReloadIndexerRequest, runWithReconnect } from "@starkstream/indexer";
+import { createAuthenticatedClient } from "@starkstream/protocol";
+import { defineCommand, runMain } from "citty";
+import consola, { type ConsolaInstance } from "consola";
+import { blueBright } from "picocolors";
 import {
   checkForUnknownArgs,
   getProcessedRuntimeConfig,
   getRuntimeDataFromEnv,
-} from "apibara/common";
-import { defineCommand, runMain } from "citty";
-import consola, { type ConsolaInstance } from "consola";
-import { blueBright } from "picocolors";
-import { register } from "#apibara-internal-virtual/instrumentation";
-// used when running with node .apibara/build/start.mjs as these values are made static during build time (except userEnvRuntimeConfig)
+} from "starkstream/common";
+import { register } from "#starkstream-internal-virtual/instrumentation";
+// used when running with node .starkstream/build/start.mjs as these values are made static during build time (except userEnvRuntimeConfig)
 import {
   preset as originalPreset,
   presets,
   runtimeConfig,
   userEnvRuntimeConfig,
-} from "#apibara-internal-virtual/static-config";
+} from "#starkstream-internal-virtual/static-config";
 import { createIndexer } from "./internal/app";
 
 const startCommand = defineCommand({
@@ -37,7 +37,7 @@ const startCommand = defineCommand({
       type: "boolean",
       default: true,
       description:
-        "--standalone: can run the indexer just with node and without apibara cli \n\t\t\t  --no-standalone: must run the indexer with apibara cli",
+        "--standalone: can run the indexer just with node and without starkstream cli \n\t\t\t  --no-standalone: must run the indexer with starkstream cli",
     },
   },
   async run({ args, cmd }) {
@@ -52,7 +52,7 @@ const startCommand = defineCommand({
         let processedRuntimeConfig: Record<string, unknown> | undefined;
 
         if (standalone) {
-          // when user does node .apibara/build/start.mjs
+          // when user does node .starkstream/build/start.mjs
           preset = argPreset ?? originalPreset;
           processedRuntimeConfig = getProcessedRuntimeConfig({
             preset,
@@ -61,7 +61,7 @@ const startCommand = defineCommand({
             userEnvRuntimeConfig,
           });
         } else {
-          // When user does apibara start
+          // When user does starkstream start
           const envResult = getRuntimeDataFromEnv();
           preset = envResult.preset;
           processedRuntimeConfig = envResult.processedRuntimeConfig;

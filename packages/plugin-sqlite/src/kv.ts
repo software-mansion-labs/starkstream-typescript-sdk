@@ -1,4 +1,4 @@
-import type { Cursor, DataFinality } from "@apibara/protocol";
+import type { Cursor, DataFinality } from "@starkstream/protocol";
 import type { Database } from "better-sqlite3";
 
 import {

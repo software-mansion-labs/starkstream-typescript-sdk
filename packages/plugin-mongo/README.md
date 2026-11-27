@@ -1,4 +1,4 @@
-# `@apibara/plugin-mongo`
+# `@starkstream/plugin-mongo`
 
 TODO
 

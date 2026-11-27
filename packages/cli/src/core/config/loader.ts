@@ -1,11 +1,11 @@
-import type {
-  ApibaraConfig,
-  ApibaraOptions,
-  LoadConfigOptions,
-} from "apibara/types";
 import { loadConfig, watchConfig } from "c12";
 import { klona } from "klona/full";
-import { ApibaraDefaults } from "./defaults";
+import type {
+  LoadConfigOptions,
+  StarkstreamConfig,
+  StarkstreamOptions,
+} from "starkstream/types";
+import { StarkstreamDefaults } from "./defaults";
 import { resolvePathOptions } from "./resolvers/paths.resolver";
 import { runtimeConfigResolver } from "./resolvers/runtime.resolver";
 
@@ -13,10 +13,10 @@ import { runtimeConfigResolver } from "./resolvers/runtime.resolver";
 const configResolvers = [resolvePathOptions, runtimeConfigResolver] as const;
 
 export async function loadOptions(
-  configOverrides: ApibaraConfig = {},
+  configOverrides: StarkstreamConfig = {},
   opts: LoadConfigOptions = {},
   dev = false,
-): Promise<ApibaraOptions> {
+): Promise<StarkstreamOptions> {
   const options = await _loadUserConfig(configOverrides, opts, dev);
 
   // Check if the runtimeConfig is serializable
@@ -37,27 +37,27 @@ export async function loadOptions(
 }
 
 async function _loadUserConfig(
-  configOverrides: ApibaraConfig = {},
+  configOverrides: StarkstreamConfig = {},
   opts: LoadConfigOptions = {},
   dev = false,
-): Promise<ApibaraOptions> {
+): Promise<StarkstreamOptions> {
   // biome-ignore lint: noParameterAssign
   configOverrides = klona(configOverrides);
 
   const loadedConfig = await (opts.watch
-    ? watchConfig<ApibaraConfig>
-    : loadConfig<ApibaraConfig>)({
-    name: "apibara",
+    ? watchConfig<StarkstreamConfig>
+    : loadConfig<StarkstreamConfig>)({
+    name: "starkstream",
     dotenv: dev,
     cwd: configOverrides.rootDir,
     overrides: {
       ...configOverrides,
     },
-    defaults: { ...ApibaraDefaults },
+    defaults: { ...StarkstreamDefaults },
     ...opts.c12,
   });
 
-  const options = klona(loadedConfig.config) as ApibaraOptions;
+  const options = klona(loadedConfig.config) as StarkstreamOptions;
 
   options._config = configOverrides;
   options._c12 = loadedConfig;

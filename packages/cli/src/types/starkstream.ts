@@ -1,7 +1,7 @@
 import type { ConsolaInstance } from "consola";
 import type { Hookable } from "hookable";
-import type { ApibaraDynamicConfig, ApibaraOptions } from "./config";
-import type { ApibaraHooks } from "./hooks";
+import type { StarkstreamDynamicConfig, StarkstreamOptions } from "./config";
+import type { StarkstreamHooks } from "./hooks";
 
 export type IndexerDefinition = {
   // Name of the indexer.
@@ -10,11 +10,11 @@ export type IndexerDefinition = {
   indexer: string;
 };
 
-export interface Apibara {
-  options: ApibaraOptions;
-  hooks: Hookable<ApibaraHooks>;
+export interface Starkstream {
+  options: StarkstreamOptions;
+  hooks: Hookable<StarkstreamHooks>;
   indexers: IndexerDefinition[];
   logger: ConsolaInstance;
   close: () => Promise<void>;
-  updateConfig: (config: ApibaraDynamicConfig) => void | Promise<void>;
+  updateConfig: (config: StarkstreamDynamicConfig) => void | Promise<void>;
 }

@@ -32,13 +32,13 @@ export const storages: StorageDataType[] = [
 
 export const packageVersions = {
   // Required Dependencies
-  apibara: "next",
-  "@apibara/protocol": "next",
-  "@apibara/starknet": "next",
+  starkstream: "^2.1.0",
+  "@starkstream/protocol": "^2.1.0",
+  "@starkstream/starknet": "^2.1.0",
   // Storage Dependencies
-  "@apibara/plugin-drizzle": "next",
-  "@apibara/plugin-mongo": "next",
-  "@apibara/plugin-sqlite": "next",
+  "@starkstream/plugin-drizzle": "^2.1.0",
+  "@starkstream/plugin-mongo": "^2.1.0",
+  "@starkstream/plugin-sqlite": "^2.1.0",
   // Postgres Dependencies
   "@electric-sql/pglite": "^0.2.17",
   "drizzle-orm": "^0.40.1",
@@ -51,6 +51,6 @@ export const packageVersions = {
 };
 
 export const dnaUrls = {
-  mainnet: "https://mainnet.starknet.a5a.ch",
-  sepolia: "https://sepolia.starknet.a5a.ch",
+  mainnet: "https://mainnet.starkstream.io",
+  sepolia: "https://testnet.starkstream.io",
 };

@@ -1,11 +1,11 @@
-# `@apibara/plugin-health`
+# `@starkstream/plugin-health`
 
 This package provides a plugin to monitor the health of an indexer.
 
 ## Installation
 
 ```bash
-npm add @apibara/plugin-health
+npm add @starkstream/plugin-health
 ```
 
 ## Usage
@@ -13,7 +13,7 @@ npm add @apibara/plugin-health
 Import the plugin and then register it with the indexer.
 
 ```ts
-import { health } from "@apibara/plugin-health";
+import { health } from "@starkstream/plugin-health";
 
 export default defineIndexer(StarknetStream)({
   plugins: [health()],

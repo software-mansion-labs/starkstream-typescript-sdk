@@ -1,8 +1,8 @@
 {
-  "name": "apibara-typescript-sdk",
+  "name": "starkstream-typescript-sdk",
   "private": true,
   "version": "0.0.0",
-  "description": "Apibara Typescript monorepo",
+  "description": "Starkstream TypeScript SDK",
   "scripts": {
     "build": "turbo run build",
     "typecheck": "turbo run typecheck",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/apibara/typescript-sdk.git"
+    "url": "https://github.com/software-mansion-labs/starkstream-typescript-sdk.git"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.1",

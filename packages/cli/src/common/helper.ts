@@ -1,25 +1,26 @@
 import defu from "defu";
 import {
-  ENV_INTERNAL_APIBARA_PRESET,
-  ENV_INTERNAL_APIBARA_PRESETS,
-  ENV_INTERNAL_APIBARA_PROCESSED_RUNTIME,
-  ENV_INTERNAL_APIBARA_RUNTIME,
-  USER_ENV_APIBARA_RUNTIME_CONFIG,
+  ENV_INTERNAL_STARKSTREAM_PRESET,
+  ENV_INTERNAL_STARKSTREAM_PRESETS,
+  ENV_INTERNAL_STARKSTREAM_PROCESSED_RUNTIME,
+  ENV_INTERNAL_STARKSTREAM_RUNTIME,
+  USER_ENV_STARKSTREAM_RUNTIME_CONFIG,
 } from "./constants";
 
 export function getRuntimeDataFromEnv() {
   const processedRuntimeConfig: Record<string, unknown> = JSON.parse(
-    process.env[ENV_INTERNAL_APIBARA_PROCESSED_RUNTIME] ?? "{}",
+    process.env[ENV_INTERNAL_STARKSTREAM_PROCESSED_RUNTIME] ?? "{}",
   );
-  const preset: string | undefined = process.env[ENV_INTERNAL_APIBARA_PRESET];
+  const preset: string | undefined =
+    process.env[ENV_INTERNAL_STARKSTREAM_PRESET];
   const presets: Record<string, unknown> | undefined = JSON.parse(
-    process.env[ENV_INTERNAL_APIBARA_PRESETS] ?? "{}",
+    process.env[ENV_INTERNAL_STARKSTREAM_PRESETS] ?? "{}",
   );
   const runtimeConfig: Record<string, unknown> | undefined = JSON.parse(
-    process.env[ENV_INTERNAL_APIBARA_RUNTIME] ?? "{}",
+    process.env[ENV_INTERNAL_STARKSTREAM_RUNTIME] ?? "{}",
   );
   const userEnvRuntimeConfig: Record<string, unknown> | undefined = JSON.parse(
-    process.env[USER_ENV_APIBARA_RUNTIME_CONFIG] ?? "{}",
+    process.env[USER_ENV_STARKSTREAM_RUNTIME_CONFIG] ?? "{}",
   );
 
   return {
@@ -76,7 +77,7 @@ export function getProcessedRuntimeConfig({
       _runtimeConfig = defu(userEnvRuntimeConfig, _runtimeConfig);
     } catch (error) {
       throw new Error(
-        "Failed to parse runtime config from process.env.APIBARA_RUNTIME_CONFIG. Please ensure it is a valid JSON string.",
+        "Failed to parse runtime config from process.env.STARKSTREAM_RUNTIME_CONFIG. Please ensure it is a valid JSON string.",
         { cause: error },
       );
     }

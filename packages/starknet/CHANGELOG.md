@@ -1,4 +1,4 @@
-# Change Log - @apibara/starknet
+# Change Log - @starkstream/starknet
 
 <!-- This log was last generated on Thu, 30 Apr 2026 19:15:51 GMT and should not be manually modified. -->
 

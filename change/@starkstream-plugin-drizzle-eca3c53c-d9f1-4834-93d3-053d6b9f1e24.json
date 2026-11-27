@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Rename the SDK packages and CLI to Starkstream",
+  "packageName": "@starkstream/plugin-drizzle",
+  "email": "makow.088@gmail.com",
+  "dependentChangeType": "none"
+}

@@ -12,7 +12,7 @@ import {
   RequiredCodec,
   StringCodec,
   Uint8ArrayCodec,
-} from "@apibara/protocol/codec";
+} from "@starkstream/protocol/codec";
 import { FieldElement } from "./common";
 import * as proto from "./proto";
 

@@ -1,4 +1,4 @@
-# Change Log - @apibara/protocol
+# Change Log - @starkstream/protocol
 
 <!-- This log was last generated on Mon, 11 May 2026 19:20:53 GMT and should not be manually modified. -->
 

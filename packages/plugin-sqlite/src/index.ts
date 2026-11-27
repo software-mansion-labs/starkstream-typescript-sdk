@@ -1,10 +1,10 @@
-import { useIndexerContext } from "@apibara/indexer";
-import { defineIndexerPlugin, useLogger } from "@apibara/indexer/plugins";
-import type { Cursor, DataFinality } from "@apibara/protocol";
+import { useIndexerContext } from "@starkstream/indexer";
+import { defineIndexerPlugin, useLogger } from "@starkstream/indexer/plugins";
+import type { Cursor, DataFinality } from "@starkstream/protocol";
 import type { Database as SqliteDatabase } from "better-sqlite3";
 
-import { generateIndexerId } from "@apibara/indexer/internal";
-import { useInternalContext } from "@apibara/indexer/internal/plugins";
+import { generateIndexerId } from "@starkstream/indexer/internal";
+import { useInternalContext } from "@starkstream/indexer/internal/plugins";
 import {
   KeyValueStore,
   cleanupKV,
@@ -79,7 +79,7 @@ export function sqliteStorage<TFilter, TBlock>({
   return defineIndexerPlugin<TFilter, TBlock>((indexer) => {
     let indexerId = "";
     let prevFinality: DataFinality | undefined;
-    const alwaysReindex = process.env["APIBARA_ALWAYS_REINDEX"] === "true";
+    const alwaysReindex = process.env["STARKSTREAM_ALWAYS_REINDEX"] === "true";
 
     indexer.hooks.hook("plugins:init", async () => {
       const { indexerName: indexerFileName, availableIndexers } =

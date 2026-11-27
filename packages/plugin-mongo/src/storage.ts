@@ -1,4 +1,4 @@
-import type { Cursor } from "@apibara/protocol";
+import type { Cursor } from "@starkstream/protocol";
 import type {
   BulkWriteOptions,
   ClientSession,

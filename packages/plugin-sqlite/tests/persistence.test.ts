@@ -1,17 +1,17 @@
-import { run } from "@apibara/indexer";
+import { run } from "@starkstream/indexer";
 import {
   generateMockMessages,
   getMockIndexer,
-} from "@apibara/indexer/internal/testing";
+} from "@starkstream/indexer/internal/testing";
 import {
   type MockBlock,
   MockClient,
   type MockFilter,
-} from "@apibara/protocol/testing";
+} from "@starkstream/protocol/testing";
 import Database from "better-sqlite3";
 import { describe, expect, it } from "vitest";
 
-import type { Finalize, Invalidate } from "@apibara/protocol";
+import type { Finalize, Invalidate } from "@starkstream/protocol";
 import { sqliteStorage } from "../src";
 import type { CheckpointRow } from "../src/persistence";
 

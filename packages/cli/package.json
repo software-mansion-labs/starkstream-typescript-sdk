@@ -1,7 +1,7 @@
 {
-  "name": "apibara",
+  "name": "starkstream",
   "version": "2.1.4",
-  "repository": "apibara/typescript-sdk",
+  "repository": "software-mansion-labs/starkstream-typescript-sdk",
   "type": "module",
   "main": "./dist/core/index.mjs",
   "exports": {
@@ -75,7 +75,7 @@
     }
   },
   "bin": {
-    "apibara": "./dist/cli/index.mjs"
+    "starkstream": "./dist/cli/index.mjs"
   },
   "files": [
     "dist",
@@ -99,7 +99,7 @@
     "playground:add": "pnpm playground add --dir playground"
   },
   "devDependencies": {
-    "@apibara/starknet": "workspace:*",
+    "@starkstream/starknet": "workspace:*",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20.14.0",
     "@types/prompts": "^2.4.9",
@@ -109,8 +109,8 @@
     "vitest": "^1.6.0"
   },
   "dependencies": {
-    "@apibara/indexer": "workspace:*",
-    "@apibara/protocol": "workspace:*",
+    "@starkstream/indexer": "workspace:*",
+    "@starkstream/protocol": "workspace:*",
     "@rollup/plugin-replace": "^6.0.2",
     "@rollup/plugin-virtual": "^3.0.2",
     "c12": "^1.11.1",

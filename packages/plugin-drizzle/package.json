@@ -1,7 +1,7 @@
 {
-  "name": "@apibara/plugin-drizzle",
+  "name": "@starkstream/plugin-drizzle",
   "version": "2.1.3",
-  "repository": "apibara/typescript-sdk",
+  "repository": "software-mansion-labs/starkstream-typescript-sdk",
   "type": "module",
   "files": [
     "dist",
@@ -55,8 +55,8 @@
     "vitest": "^1.6.0"
   },
   "dependencies": {
-    "@apibara/indexer": "workspace:*",
-    "@apibara/protocol": "workspace:*",
+    "@starkstream/indexer": "workspace:*",
+    "@starkstream/protocol": "workspace:*",
     "postgres-range": "^1.1.4"
   }
 }

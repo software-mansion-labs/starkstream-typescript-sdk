@@ -1,1 +1,1 @@
-export type ApibaraRuntimeConfig = Record<string, unknown>;
+export type StarkstreamRuntimeConfig = Record<string, unknown>;

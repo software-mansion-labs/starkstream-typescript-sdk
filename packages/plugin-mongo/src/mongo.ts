@@ -1,4 +1,4 @@
-import type { Cursor } from "@apibara/protocol";
+import type { Cursor } from "@starkstream/protocol";
 import type { ClientSession, Db } from "mongodb";
 
 export async function invalidate(

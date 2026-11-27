@@ -1,4 +1,4 @@
-# `@apibara/indexer`
+# `@starkstream/indexer`
 
 TODO
 

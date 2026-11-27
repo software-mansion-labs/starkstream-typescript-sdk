@@ -1,4 +1,4 @@
-import type { Cursor } from "@apibara/protocol";
+import type { Cursor } from "@starkstream/protocol";
 
 export type VcrConfig = {
   cassetteDir: string;

@@ -5,7 +5,7 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "dev": "apibara dev",
+    "dev": "starkstream dev",
     "lint": "biome check .",
     "lint:fix": "pnpm lint --write",
     "test": "vitest",
@@ -24,13 +24,13 @@
     "vitest": "^1.6.0"
   },
   "dependencies": {
-    "@apibara/indexer": "workspace:*",
-    "@apibara/plugin-drizzle": "workspace:*",
-    "@apibara/plugin-health": "workspace:*",
-    "@apibara/protocol": "workspace:*",
-    "@apibara/starknet": "workspace:*",
+    "@starkstream/indexer": "workspace:*",
+    "@starkstream/plugin-drizzle": "workspace:*",
+    "@starkstream/plugin-health": "workspace:*",
+    "@starkstream/protocol": "workspace:*",
+    "@starkstream/starknet": "workspace:*",
     "@electric-sql/pglite": "^0.2.17",
-    "apibara": "workspace:*",
+    "starkstream": "workspace:*",
     "drizzle-orm": "^0.40.1",
     "elysia": "^1.4.27",
     "pg": "^8.13.1",

@@ -1,13 +1,13 @@
-import type { ApibaraConfig } from "apibara/types";
+import type { StarkstreamConfig } from "starkstream/types";
 
-export const ApibaraDefaults: ApibaraConfig = {
+export const StarkstreamDefaults: StarkstreamConfig = {
   rootDir: ".",
   indexersDir: "indexers",
 
   runtimeConfig: {},
   hooks: {},
 
-  buildDir: ".apibara",
+  buildDir: ".starkstream",
 
   typescript: {
     strict: false,

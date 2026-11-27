@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import type { Client, StreamDataResponse } from "@apibara/protocol";
+import type { Client, StreamDataResponse } from "@starkstream/protocol";
 import { type Indexer, run } from "../indexer";
 import type { CassetteOptions, VcrConfig } from "./config";
 import { serialize } from "./helper";

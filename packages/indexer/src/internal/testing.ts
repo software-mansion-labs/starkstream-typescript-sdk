@@ -1,10 +1,14 @@
-import { type Finalize, type Invalidate, isCursor } from "@apibara/protocol";
+import {
+  type Finalize,
+  type Invalidate,
+  isCursor,
+} from "@starkstream/protocol";
 import {
   type MockBlock,
   type MockFilter,
   MockStream,
   type MockStreamResponse,
-} from "@apibara/protocol/testing";
+} from "@starkstream/protocol/testing";
 import { useIndexerContext } from "../context";
 import { type IndexerConfig, createIndexer, defineIndexer } from "../indexer";
 import { defineIndexerPlugin, logger } from "../plugins";

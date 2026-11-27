@@ -1,5 +1,5 @@
-import { defineIndexerPlugin, useLogger } from "@apibara/indexer/plugins";
 import { node } from "@elysiajs/node";
+import { defineIndexerPlugin, useLogger } from "@starkstream/indexer/plugins";
 import { Elysia } from "elysia";
 
 export type IndexerHealthState =

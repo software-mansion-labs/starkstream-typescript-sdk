@@ -1,15 +1,15 @@
 import { starknetUsdcTransfers } from "@/lib/schema";
-import { drizzleStorage, useDrizzleStorage } from "@apibara/plugin-drizzle";
-import { drizzle } from "@apibara/plugin-drizzle";
-import { health } from "@apibara/plugin-health";
-import { StarknetStream } from "@apibara/starknet";
-import { defineIndexer } from "apibara/indexer";
-import { useLogger } from "apibara/plugins";
-import type { ApibaraRuntimeConfig } from "apibara/types";
+import { drizzleStorage, useDrizzleStorage } from "@starkstream/plugin-drizzle";
+import { drizzle } from "@starkstream/plugin-drizzle";
+import { health } from "@starkstream/plugin-health";
+import { StarknetStream } from "@starkstream/starknet";
 import { hash } from "starknet";
+import { defineIndexer } from "starkstream/indexer";
+import { useLogger } from "starkstream/plugins";
+import type { StarkstreamRuntimeConfig } from "starkstream/types";
 
 // USDC Transfers on Starknet
-export default async function (runtimeConfig: ApibaraRuntimeConfig) {
+export default async function (runtimeConfig: StarkstreamRuntimeConfig) {
   const {
     starknet: { startingBlock },
   } = runtimeConfig;
@@ -29,7 +29,7 @@ export default async function (runtimeConfig: ApibaraRuntimeConfig) {
   });
 
   return defineIndexer(StarknetStream)({
-    streamUrl: "https://mainnet.starknet.a5a.ch",
+    streamUrl: "https://mainnet.starkstream.io",
     finality: "accepted",
     startingBlock: BigInt(startingBlock),
     plugins: [

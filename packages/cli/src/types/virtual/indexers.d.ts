@@ -1,9 +1,9 @@
-import type { IndexerWithStreamConfig } from "@apibara/indexer";
-import type { ApibaraRuntimeConfig } from "apibara/types";
+import type { IndexerWithStreamConfig } from "@starkstream/indexer";
+import type { StarkstreamRuntimeConfig } from "starkstream/types";
 
 export type IndexerConstructor =
   | ((
-      runtimeConfig: ApibaraRuntimeConfig,
+      runtimeConfig: StarkstreamRuntimeConfig,
     ) => IndexerWithStreamConfig<unknown, unknown, unknown>)
   | IndexerWithStreamConfig<unknown, unknown, unknown>;
 

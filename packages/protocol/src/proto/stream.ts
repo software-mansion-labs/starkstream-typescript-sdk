@@ -12,7 +12,7 @@ import { Duration } from "./google/protobuf/duration.js";
 
 export const protobufPackage = "dna.v2.stream";
 
-/** Apibara DNA server V2 */
+/** Starkstream DNA server V2 */
 
 /** Data finality. */
 export enum DataFinality {

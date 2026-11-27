@@ -7,17 +7,17 @@
     "rootDir": ".",
     "types": ["node"],
     "paths": {
-      "apibara/cli": ["./src/cli"],
-      "apibara/config": ["./src/config"],
-      "apibara/core": ["./src/core"],
-      "apibara/rolldown": ["./src/rolldown"],
-      "apibara/types": ["./src/types"],
-      "apibara/hooks": ["./src/hooks"],
-      "apibara/create": ["./src/create"],
-      "apibara/runtime/meta": ["./runtime-meta"],
-      "apibara/runtime": ["./src/runtime"],
-      "apibara/common": ["./src/common"],
-      "#apibara-internal-virtual/*": ["./src/types/virtual/*"]
+      "starkstream/cli": ["./src/cli"],
+      "starkstream/config": ["./src/config"],
+      "starkstream/core": ["./src/core"],
+      "starkstream/rolldown": ["./src/rolldown"],
+      "starkstream/types": ["./src/types"],
+      "starkstream/hooks": ["./src/hooks"],
+      "starkstream/create": ["./src/create"],
+      "starkstream/runtime/meta": ["./runtime-meta"],
+      "starkstream/runtime": ["./src/runtime"],
+      "starkstream/common": ["./src/common"],
+      "#starkstream-internal-virtual/*": ["./src/types/virtual/*"]
     }
   }
 }

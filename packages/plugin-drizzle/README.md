@@ -1,4 +1,4 @@
-# `@apibara/plugin-drizzle`
+# `@starkstream/plugin-drizzle`
 
 TODO
 

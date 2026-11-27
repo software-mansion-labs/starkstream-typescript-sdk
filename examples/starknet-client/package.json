@@ -10,8 +10,8 @@
     "format": "biome format . --write"
   },
   "dependencies": {
-    "@apibara/protocol": "workspace:*",
-    "@apibara/starknet": "workspace:*",
+    "@starkstream/protocol": "workspace:*",
+    "@starkstream/starknet": "workspace:*",
     "citty": "^0.1.6",
     "consola": "^3.4.2",
     "nice-grpc": "^2.1.8"

@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
-    "dev": "apibara dev",
+    "dev": "starkstream dev",
     "lint": "biome check .",
     "lint:fix": "pnpm lint --write"
   },
@@ -16,11 +16,11 @@
     "typescript": "^5.6.2"
   },
   "dependencies": {
-    "@apibara/indexer": "workspace:*",
-    "@apibara/plugin-mongo": "workspace:*",
-    "@apibara/protocol": "workspace:*",
-    "@apibara/starknet": "workspace:*",
-    "apibara": "workspace:*",
+    "@starkstream/indexer": "workspace:*",
+    "@starkstream/plugin-mongo": "workspace:*",
+    "@starkstream/protocol": "workspace:*",
+    "@starkstream/starknet": "workspace:*",
+    "starkstream": "workspace:*",
     "mongodb": "^6.12.0"
   }
 }

@@ -1,11 +1,11 @@
-# `@apibara/starknet`
+# `@starkstream/starknet`
 
-This package provides types for the Starknet streams on Apibara.
+This package provides types for the Starknet streams on Starkstream.
 
 ## Installation
 
 ```bash
-npm add @apibara/starknet
+npm add @starkstream/starknet
 ```
 
 ## License

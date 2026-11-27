@@ -1,9 +1,9 @@
-import type { Cursor, DataFinality } from "@apibara/protocol";
+import type { Cursor, DataFinality } from "@starkstream/protocol";
 import {
   type MockBlock,
   MockClient,
   type MockFilter,
-} from "@apibara/protocol/testing";
+} from "@starkstream/protocol/testing";
 import { describe, expect, it } from "vitest";
 import { type IndexerContext, useMessageMetadataContext } from "../src/context";
 import { run } from "../src/indexer";

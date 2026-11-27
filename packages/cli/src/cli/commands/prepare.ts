@@ -1,7 +1,7 @@
-import { checkForUnknownArgs, commonArgs } from "apibara/common";
-import { createApibara, writeTypes } from "apibara/core";
 import { defineCommand } from "citty";
 import { resolve } from "pathe";
+import { checkForUnknownArgs, commonArgs } from "starkstream/common";
+import { createStarkstream, writeTypes } from "starkstream/core";
 
 export default defineCommand({
   meta: {
@@ -15,7 +15,7 @@ export default defineCommand({
     await checkForUnknownArgs(args, cmd);
 
     const rootDir = resolve((args.dir || ".") as string);
-    const apibara = await createApibara({ rootDir });
-    await writeTypes(apibara);
+    const starkstream = await createStarkstream({ rootDir });
+    await writeTypes(starkstream);
   },
 });

@@ -14,7 +14,7 @@ import {
   type StreamDataRequest,
   type StreamDataResponse,
   type SystemMessage,
-} from "@apibara/protocol";
+} from "@starkstream/protocol";
 import consola from "consola";
 import {
   type Hookable,

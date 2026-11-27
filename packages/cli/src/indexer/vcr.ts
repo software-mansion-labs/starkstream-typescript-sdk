@@ -1,1 +1,1 @@
-export * from "@apibara/indexer/vcr";
+export * from "@starkstream/indexer/vcr";

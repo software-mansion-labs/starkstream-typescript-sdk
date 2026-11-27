@@ -12,17 +12,17 @@ import { initializeProject } from "./init";
 import {
   createIndexerFile,
   createStorageRelatedFiles,
-  updateApibaraConfigFile,
   updatePackageJson,
+  updateStarkstreamConfigFile,
 } from "./templates";
 import type { IndexerOptions, Network, Storage } from "./types";
 import {
   cancelOperation,
   checkFileExists,
   convertKebabToCamelCase,
-  getApibaraConfigLanguage,
   getPackageManager,
-  hasApibaraConfig,
+  getStarkstreamConfigLanguage,
+  hasStarkstreamConfig,
   validateDnaUrl,
   validateIndexerId,
   validateNetwork,
@@ -47,16 +47,16 @@ export async function addIndexer({
   argRootDir,
 }: Options) {
   const cwd = path.join(process.cwd(), argRootDir ?? ".");
-  const configExists = hasApibaraConfig(cwd);
+  const configExists = hasStarkstreamConfig(cwd);
 
   if (!configExists) {
-    consola.error("No apibara.config found in the current directory.");
+    consola.error("No starkstream.config found in the current directory.");
 
     const prompt_initialize = await prompts({
       type: "confirm",
       name: "prompt_initialize",
       message: reset(
-        "Do you want to initialize a apibara project here before adding an indexer?",
+        "Do you want to initialize a starkstream project here before adding an indexer?",
       ),
     });
 
@@ -67,15 +67,15 @@ export async function addIndexer({
       });
     } else {
       consola.info(
-        `Initialize a project with ${cyan("apibara init")} before adding an indexer`,
+        `Initialize a project with ${cyan("starkstream init")} before adding an indexer`,
       );
       throw new Error(
-        red("✖") + " Operation cancelled: No apibara.config found",
+        red("✖") + " Operation cancelled: No starkstream.config found",
       );
     }
   }
 
-  const { language, extension } = getApibaraConfigLanguage(cwd);
+  const { language, extension } = getStarkstreamConfigLanguage(cwd);
 
   validateIndexerId(argIndexerId, true);
   if (argChain !== undefined && argChain !== "starknet") {
@@ -170,9 +170,9 @@ export async function addIndexer({
     extension,
   };
 
-  await updateApibaraConfigFile(options);
+  await updateStarkstreamConfigFile(options);
 
-  consola.success(`Updated ${cyan(`apibara.config.${extension}`)}`);
+  consola.success(`Updated ${cyan(`starkstream.config.${extension}`)}`);
 
   await updatePackageJson(options);
 

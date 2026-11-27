@@ -7,7 +7,7 @@ import {
   NumberCodec,
   OneOfCodec,
   OptionalCodec,
-} from "@apibara/protocol/codec";
+} from "@starkstream/protocol/codec";
 import { FieldElement } from "./common";
 import * as proto from "./proto";
 

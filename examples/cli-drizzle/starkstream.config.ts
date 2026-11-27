@@ -1,4 +1,4 @@
-import { defineConfig } from "apibara/config";
+import { defineConfig } from "starkstream/config";
 
 export default defineConfig({
   runtimeConfig: {

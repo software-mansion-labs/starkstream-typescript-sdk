@@ -1,10 +1,10 @@
 import { spawn } from "node:child_process";
-import { checkForUnknownArgs, commonArgs } from "apibara/common";
-import { createApibara } from "apibara/core";
 import { defineCommand } from "citty";
 import { colors } from "consola/utils";
 import fse from "fs-extra";
 import { resolve } from "pathe";
+import { checkForUnknownArgs, commonArgs } from "starkstream/common";
+import { createStarkstream } from "starkstream/core";
 
 export default defineCommand({
   meta: {
@@ -29,33 +29,33 @@ export default defineCommand({
 
     await checkForUnknownArgs(args, cmd);
 
-    const apibara = await createApibara({
+    const starkstream = await createStarkstream({
       rootDir,
       preset,
     });
 
-    apibara.logger.start(
+    starkstream.logger.start(
       `Starting indexer ${indexer}${preset ? ` with preset ${preset}` : ""}`,
     );
 
-    const outputDir = apibara.options.outputDir || "./.apibara/build";
+    const outputDir = starkstream.options.outputDir || "./.starkstream/build";
     const entry = resolve(outputDir, "start.mjs");
 
     if (!fse.existsSync(entry)) {
-      apibara.logger.error(
-        `Output directory ${outputDir} does not exist. Try building the indexer with "apibara build" first.`,
+      starkstream.logger.error(
+        `Output directory ${outputDir} does not exist. Try building the indexer with "starkstream build" first.`,
       );
       return process.exit(1);
     }
 
-    await apibara.close();
+    await starkstream.close();
 
     const childArgs = [
       entry,
       "start",
       "--indexer",
       indexer,
-      // important: this is required to run the indexer with apibara cli to load runtime values correctly
+      // important: this is required to run the indexer with starkstream cli to load runtime values correctly
       "--no-standalone",
       ...(preset ? ["--preset", preset] : []),
     ];
@@ -66,7 +66,7 @@ export default defineCommand({
 
     childProcess.on("close", (code, signal) => {
       console.log();
-      apibara.logger.info(
+      starkstream.logger.info(
         `Indexers process exited${
           code !== null ? ` with code ${colors.red(code)}` : ""
         }`,

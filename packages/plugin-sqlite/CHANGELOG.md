@@ -1,4 +1,4 @@
-# Change Log - @apibara/plugin-sqlite
+# Change Log - @starkstream/plugin-sqlite
 
 <!-- This log was last generated on Tue, 10 Mar 2026 08:41:26 GMT and should not be manually modified. -->
 

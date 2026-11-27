@@ -49,7 +49,7 @@
       "generated.js",
       "generated.d.ts",
       "src/proto",
-      "**/.apibara"
+      "**/.starkstream"
     ]
   }
 }

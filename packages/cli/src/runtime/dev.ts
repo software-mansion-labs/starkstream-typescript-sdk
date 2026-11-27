@@ -1,9 +1,9 @@
-import { ReloadIndexerRequest, runWithReconnect } from "@apibara/indexer";
-import { createAuthenticatedClient } from "@apibara/protocol";
-import { getRuntimeDataFromEnv } from "apibara/common";
+import { ReloadIndexerRequest, runWithReconnect } from "@starkstream/indexer";
+import { createAuthenticatedClient } from "@starkstream/protocol";
 import { defineCommand, runMain } from "citty";
 import type { ConsolaInstance } from "consola";
 import { blueBright } from "picocolors";
+import { getRuntimeDataFromEnv } from "starkstream/common";
 import { availableIndexers, createIndexer } from "./internal/app";
 
 async function startIndexer(indexer: string, signal: AbortSignal) {

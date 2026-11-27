@@ -1,7 +1,7 @@
-# `@apibara/cli`
+# `starkstream`
 
-TODO
+Create, build, and run DNA indexers with the Starkstream CLI.
 
-## Installation
-
-TODO
+```bash
+npx starkstream init my-indexer
+```

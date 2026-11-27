@@ -1,18 +1,18 @@
-import { StarknetStream } from "@apibara/starknet";
-import { defineIndexer } from "apibara/indexer";
-import { useLogger } from "apibara/plugins";
+import { StarknetStream } from "@starkstream/starknet";
+import { defineIndexer } from "starkstream/indexer";
+import { useLogger } from "starkstream/plugins";
 
-import type { ApibaraRuntimeConfig } from "apibara/types";
 import { hash } from "starknet";
+import type { StarkstreamRuntimeConfig } from "starkstream/types";
 
 const PAIR_CREATED = hash.getSelectorFromName("PairCreated") as `0x${string}`;
 const SWAP = hash.getSelectorFromName("Swap") as `0x${string}`;
 const shortAddress = (addr?: string) =>
   addr ? `${addr.slice(0, 6)}...${addr.slice(-4)}` : "";
 
-export default function (runtimeConfig: ApibaraRuntimeConfig) {
+export default function (runtimeConfig: StarkstreamRuntimeConfig) {
   return defineIndexer(StarknetStream)({
-    streamUrl: "https://mainnet.starknet.a5a.ch",
+    streamUrl: "https://mainnet.starkstream.io",
     finality: "accepted",
     startingBlock: 800_000n,
     filter: {

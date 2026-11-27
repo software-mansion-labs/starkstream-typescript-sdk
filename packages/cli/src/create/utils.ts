@@ -121,10 +121,10 @@ export function validateDnaUrl(dnaUrl?: string, throwError = false) {
   return true;
 }
 
-export function hasApibaraConfig(cwd: string): boolean {
-  const configPathJS = path.join(cwd, "apibara.config.js");
-  const configPathTS = path.join(cwd, "apibara.config.ts");
-  const configPathMJS = path.join(cwd, "apibara.config.mjs");
+export function hasStarkstreamConfig(cwd: string): boolean {
+  const configPathJS = path.join(cwd, "starkstream.config.js");
+  const configPathTS = path.join(cwd, "starkstream.config.ts");
+  const configPathMJS = path.join(cwd, "starkstream.config.mjs");
 
   return (
     fs.existsSync(configPathJS) ||
@@ -133,13 +133,13 @@ export function hasApibaraConfig(cwd: string): boolean {
   );
 }
 
-export function getApibaraConfigLanguage(cwd: string): {
+export function getStarkstreamConfigLanguage(cwd: string): {
   language: Language;
   extension: FileExtension;
 } {
-  const configPathJS = path.join(cwd, "apibara.config.js");
-  const configPathTS = path.join(cwd, "apibara.config.ts");
-  const configPathMJS = path.join(cwd, "apibara.config.mjs");
+  const configPathJS = path.join(cwd, "starkstream.config.js");
+  const configPathTS = path.join(cwd, "starkstream.config.ts");
+  const configPathMJS = path.join(cwd, "starkstream.config.mjs");
 
   if (fs.existsSync(configPathMJS)) {
     return { language: "javascript", extension: "mjs" };
@@ -151,7 +151,7 @@ export function getApibaraConfigLanguage(cwd: string): {
     return { language: "typescript", extension: "ts" };
   }
 
-  throw new Error(red("✖") + " No apibara.config found");
+  throw new Error(red("✖") + " No starkstream.config found");
 }
 
 export function getDnaUrl(network: Network) {

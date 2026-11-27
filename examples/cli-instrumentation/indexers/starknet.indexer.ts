@@ -1,11 +1,11 @@
-import { defineIndexer } from "@apibara/indexer";
-import { useLogger } from "@apibara/indexer/plugins";
-import { StarknetStream } from "@apibara/starknet";
-import type { ApibaraRuntimeConfig } from "apibara/types";
+import { defineIndexer } from "@starkstream/indexer";
+import { useLogger } from "@starkstream/indexer/plugins";
+import { StarknetStream } from "@starkstream/starknet";
+import type { StarkstreamRuntimeConfig } from "starkstream/types";
 
-export default function (runtimeConfig: ApibaraRuntimeConfig) {
+export default function (runtimeConfig: StarkstreamRuntimeConfig) {
   return defineIndexer(StarknetStream)({
-    streamUrl: "https://mainnet.starknet.a5a.ch",
+    streamUrl: "https://mainnet.starkstream.io",
     finality: "accepted",
     startingBlock: 10_30_000n,
     filter: {
