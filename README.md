@@ -1,6 +1,6 @@
 # Apibara Typescript Libraries
 
-This monorepo contains all Apibara Typescript and Javascript libraries.
+This monorepo contains the Apibara TypeScript and JavaScript libraries for Starknet. For existing EVM, EVM RPC, and Beacon Chain indexers, keep using the corresponding published Apibara packages.
 
  - [`@apibara/protocol`](https://github.com/apibara/typescript-sdk/tree/main/packages/protocol): provides a client to connect to an Apibara stream.
  - [`@apibara/starknet`](https://github.com/apibara/typescript-sdk/tree/main/packages/starknet): provides types to parse StarkNet data.

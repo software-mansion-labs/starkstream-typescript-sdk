@@ -106,7 +106,6 @@
     "jiti": "^1.21.0",
     "starknet": "^6.11.0",
     "unbuild": "^2.0.0",
-    "viem": "^2.40.3",
     "vitest": "^1.6.0"
   },
   "dependencies": {

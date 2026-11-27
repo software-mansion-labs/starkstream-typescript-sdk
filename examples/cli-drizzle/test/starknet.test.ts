@@ -11,7 +11,6 @@ const vcr = createVcr();
 describe("Starknet USDC Transfers indexer", () => {
   it("should work", async () => {
     const indexer = await createIndexer({
-      evm: { startingBlock: 10_000_000 },
       starknet: { startingBlock: 800_000 },
     });
 

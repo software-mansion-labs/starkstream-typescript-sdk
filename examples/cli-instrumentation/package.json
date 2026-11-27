@@ -30,7 +30,6 @@
     "@opentelemetry/sdk-trace-node": "^2.0.0",
     "@opentelemetry/semantic-conventions": "^1.30.0",
     "apibara": "workspace:*",
-    "starknet": "^6.11.0",
-    "viem": "^2.40.0"
+    "starknet": "^6.11.0"
   }
 }

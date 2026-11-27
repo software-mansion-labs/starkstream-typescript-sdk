@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Scaffold Starknet indexers on mainnet, Sepolia, or a custom endpoint.",
+  "packageName": "apibara",
+  "email": "makow.088@gmail.com",
+  "dependentChangeType": "none"
+}

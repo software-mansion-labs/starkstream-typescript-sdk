@@ -45,8 +45,5 @@ jobs:
         run: pnpm typecheck
       - name: Run test
         run: pnpm test:ci
-        env:
-          TEST_EVM_RPC_URL: ${{ secrets.TEST_EVM_RPC_URL }}
-          TEST_EVM_SEPOLIA_RPC_URL: ${{ secrets.TEST_EVM_SEPOLIA_RPC_URL }}
       - name: Check change files
         run: pnpm beachball check

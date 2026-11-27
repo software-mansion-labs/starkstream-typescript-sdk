@@ -1,12 +1,5 @@
-import { blue, green, red, yellow } from "./colors";
-import type { Chain, ColorFunc, Network } from "./types";
-
-export type ChainDataType = {
-  name: Chain;
-  display: string;
-  color: ColorFunc;
-  networks: NetworkDataType[];
-};
+import { blue, green, red } from "./colors";
+import type { ColorFunc, Network } from "./types";
 
 export type NetworkDataType = {
   name: Network;
@@ -26,33 +19,6 @@ export type StorageDataType = {
   color: ColorFunc;
 };
 
-export const chains: ChainDataType[] = [
-  {
-    name: "starknet",
-    display: "Starknet",
-    color: blue,
-    networks: [
-      { name: "mainnet", display: "Mainnet", color: blue },
-      { name: "sepolia", display: "Sepolia", color: yellow },
-    ],
-  },
-  {
-    name: "ethereum",
-    display: "Ethereum",
-    color: green,
-    networks: [
-      { name: "mainnet", display: "Mainnet", color: blue },
-      { name: "sepolia", display: "Sepolia", color: yellow },
-    ],
-  },
-  {
-    name: "beaconchain",
-    display: "Beacon Chain",
-    color: yellow,
-    networks: [{ name: "mainnet", display: "Mainnet", color: yellow }],
-  },
-];
-
 export const networks: NetworkDataType[] = [
   { name: "mainnet", display: "Mainnet", color: blue },
   { name: "sepolia", display: "Sepolia", color: green },
@@ -68,9 +34,6 @@ export const packageVersions = {
   // Required Dependencies
   apibara: "next",
   "@apibara/protocol": "next",
-  // Chain Dependencies
-  "@apibara/evm": "next",
-  "@apibara/beaconchain": "next",
   "@apibara/starknet": "next",
   // Storage Dependencies
   "@apibara/plugin-drizzle": "next",
@@ -88,9 +51,6 @@ export const packageVersions = {
 };
 
 export const dnaUrls = {
-  ethereum: "https://mainnet.ethereum.a5a.ch",
-  ethereumSepolia: "https://sepolia.ethereum.a5a.ch",
-  beaconchain: "https://beaconchain.preview.apibara.org",
-  starknet: "https://mainnet.starknet.a5a.ch",
-  starknetSepolia: "https://sepolia.starknet.a5a.ch",
+  mainnet: "https://mainnet.starknet.a5a.ch",
+  sepolia: "https://sepolia.starknet.a5a.ch",
 };

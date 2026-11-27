@@ -120,7 +120,7 @@ export function getMockIndexer(params?: MockIndexerParams) {
 
   return createIndexer(
     defineIndexer(MockStream)({
-      streamUrl: "https://sepolia.ethereum.a5a.ch",
+      streamUrl: "https://testnet.starkstream.io",
       finality: "accepted",
       filter: {},
       async transform() {},

@@ -66,22 +66,13 @@ export default defineConfig({
 export function generateIndexer({
   indexerId,
   storage,
-  chain,
   language,
 }: IndexerOptions) {
   return `import { defineIndexer } from "apibara/indexer";
 import { useLogger } from "apibara/plugins";
 ${storage === "postgres" ? `import { drizzleStorage } from "@apibara/plugin-drizzle";` : ""}
 ${storage === "postgres" ? `import { drizzle } from "@apibara/plugin-drizzle";` : ""}
-${
-  chain === "ethereum"
-    ? `import { EvmStream } from "@apibara/evm";`
-    : chain === "beaconchain"
-      ? `import { BeaconChainStream } from "@apibara/beaconchain";`
-      : chain === "starknet"
-        ? `import { StarknetStream } from "@apibara/starknet";`
-        : ""
-}
+import { StarknetStream } from "@apibara/starknet";
 ${language === "typescript" ? `import type { ApibaraRuntimeConfig } from "apibara/types";` : ""}
 ${storage === "postgres" ? `import * as schema from "../lib/schema";` : ""}
 
@@ -96,20 +87,12 @@ export default function (runtimeConfig${language === "typescript" ? ": ApibaraRu
       : ""
   }
 
-  return defineIndexer(${
-    chain === "ethereum"
-      ? "EvmStream"
-      : chain === "beaconchain"
-        ? "BeaconChainStream"
-        : chain === "starknet"
-          ? "StarknetStream"
-          : ""
-  })({
+  return defineIndexer(StarknetStream)({
     streamUrl,
     finality: "accepted",
     startingBlock: BigInt(startingBlock),
     filter: {
-      ${chain === "ethereum" ? "logs: []," : chain === "starknet" ? "events:  []," : ""}
+      events: [],
     },
     plugins: [${storage === "postgres" ? "drizzleStorage({ db, migrate: { migrationsFolder: './drizzle' } })" : ""}],
     async transform({ endCursor, finality }) {
@@ -162,7 +145,6 @@ export async function createIndexerFile(options: IndexerOptions) {
 
 export async function updatePackageJson({
   cwd,
-  chain,
   storage,
   language,
 }: IndexerOptions) {
@@ -170,15 +152,8 @@ export async function updatePackageJson({
 
   const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
 
-  if (chain === "ethereum") {
-    packageJson.dependencies["@apibara/evm"] = packageVersions["@apibara/evm"];
-  } else if (chain === "beaconchain") {
-    packageJson.dependencies["@apibara/beaconchain"] =
-      packageVersions["@apibara/beaconchain"];
-  } else if (chain === "starknet") {
-    packageJson.dependencies["@apibara/starknet"] =
-      packageVersions["@apibara/starknet"];
-  }
+  packageJson.dependencies["@apibara/starknet"] =
+    packageVersions["@apibara/starknet"];
 
   if (storage === "postgres") {
     packageJson.scripts["drizzle:generate"] = "drizzle-kit generate";
@@ -209,7 +184,6 @@ export async function updatePackageJson({
 export async function updateApibaraConfigFile({
   indexerId,
   cwd,
-  chain,
   storage,
   language,
   network,
@@ -220,7 +194,7 @@ export async function updateApibaraConfigFile({
 
   const runtimeConfigString = `{
   startingBlock: 0,
-  streamUrl: "${dnaUrl ?? getDnaUrl(chain, network)}"  
+  streamUrl: ${JSON.stringify(dnaUrl ?? getDnaUrl(network))}
 }`;
 
   const project = new Project();

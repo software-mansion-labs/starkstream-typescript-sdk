@@ -39,7 +39,7 @@ type Request = CodecType<typeof StarknetStream.Request>;
 
 const command = defineCommand({
   meta: {
-    name: "example-evm-client",
+    name: "example-starknet-client",
     version: "1.0.0",
     description: "Example showing how to connect to a Starknet stream",
   },

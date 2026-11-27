@@ -9,8 +9,7 @@
       "dependsOn": ["build"]
     },
     "test:ci": {
-      "dependsOn": ["build"],
-      "env": ["TEST_EVM_RPC_URL", "TEST_EVM_SEPOLIA_RPC_URL"]
+      "dependsOn": ["build"]
     },
     "typecheck": {
       "cache": false

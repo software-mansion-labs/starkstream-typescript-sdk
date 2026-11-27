@@ -4,38 +4,6 @@
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.ethereum_usdc_transfers": {
-      "name": "ethereum_usdc_transfers",
-      "schema": "",
-      "columns": {
-        "_id": {
-          "name": "_id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
-        },
-        "number": {
-          "name": "number",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "hash": {
-          "name": "hash",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
     "public.starknet_usdc_transfers": {
       "name": "starknet_usdc_transfers",
       "schema": "",
