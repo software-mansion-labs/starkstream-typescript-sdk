@@ -16,7 +16,7 @@ export default defineCommand({
     },
     chain: {
       type: "string",
-      description: "Blockchain - ethereum, beaconchain, starknet",
+      description: "Blockchain (default: starknet)",
     },
     network: {
       type: "string",

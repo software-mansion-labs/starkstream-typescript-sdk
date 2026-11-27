@@ -4,7 +4,7 @@ import * as prettier from "prettier";
 import prompts from "prompts";
 import { blue, cyan, red, yellow } from "./colors";
 import { dnaUrls, networks } from "./constants";
-import type { Chain, FileExtension, Language, Network, PkgInfo } from "./types";
+import type { FileExtension, Language, Network, PkgInfo } from "./types";
 
 export function isEmpty(path: string) {
   const files = fs.readdirSync(path);
@@ -74,79 +74,18 @@ export function validateIndexerId(indexerId?: string, throwError = false) {
   return true;
 }
 
-export function validateChain(chain?: string, throwError = false) {
-  if (!chain) {
-    return false;
-  }
-  if (chain) {
-    if (chain === "starknet" || chain === "ethereum" || chain === "beaconchain")
-      return true;
-    if (throwError) {
-      throw new Error(
-        `Invalid chain ${cyan("(--chain)")}: ${red(chain)}. Chain must be one of ${blue("starknet, ethereum, beaconchain")}.`,
-      );
-    }
-    return false;
-  }
-  return true;
-}
-
-export function validateNetwork(
-  chain?: string,
-  network?: string,
-  throwError = false,
-) {
+export function validateNetwork(network?: string, throwError = false) {
   if (!network) {
     return false;
   }
 
-  if (network === "other") {
-    return true;
-  }
-
-  if (chain) {
-    if (chain === "starknet") {
-      if (network === "mainnet" || network === "sepolia") {
-        return true;
-      }
-      if (throwError) {
-        throw new Error(
-          `Invalid network ${cyan("(--network)")}: ${red(network)}. For chain ${blue("starknet")}, network must be one of ${blue("mainnet, sepolia, other")}.`,
-        );
-      }
-      return false;
-    }
-    if (chain === "ethereum") {
-      if (network === "mainnet" || network === "goerli") {
-        return true;
-      }
-      if (throwError) {
-        throw new Error(
-          `Invalid network ${cyan("(--network)")}: ${red(network)}. For chain ${blue("ethereum")}, network must be one of ${blue("mainnet, goerli, other")}.`,
-        );
-      }
-      return false;
-    }
-    if (chain === "beaconchain") {
-      if (network === "mainnet") {
-        return true;
-      }
-      if (throwError) {
-        throw new Error(
-          `Invalid network ${cyan("(--network)")}: ${red(network)}. For chain ${blue("beaconchain")}, network must be ${blue("mainnet, other")}.`,
-        );
-      }
-      return false;
-    }
-  }
-
-  if (networks.find((n) => n.name === network)) {
+  if (networks.some((n) => n.name === network)) {
     return true;
   }
 
   if (throwError) {
     throw new Error(
-      `Invalid network ${cyan("(--network)")}: ${red(network)}. Network must be one of ${blue("mainnet, sepolia, goerli, other")}.`,
+      `Invalid network ${cyan("(--network)")}: ${red(network)}. Network must be one of ${blue("mainnet, sepolia, other")}.`,
     );
   }
   return false;
@@ -174,7 +113,7 @@ export function validateDnaUrl(dnaUrl?: string, throwError = false) {
   if (!dnaUrl.startsWith("https://") && !dnaUrl.startsWith("http://")) {
     if (throwError) {
       throw new Error(
-        `Invalid DNA URL ${cyan("(--dna-url)")}: ${red(dnaUrl)}. DNA URL must start with ${blue("https:// or http://")}.`,
+        `Invalid DNA URL ${cyan("(--dnaUrl)")}: ${red(dnaUrl)}. DNA URL must start with ${blue("https:// or http://")}.`,
       );
     }
     return false;
@@ -215,32 +154,12 @@ export function getApibaraConfigLanguage(cwd: string): {
   throw new Error(red("✖") + " No apibara.config found");
 }
 
-export function getDnaUrl(chain: Chain, network: Network) {
-  if (chain === "ethereum") {
-    if (network === "mainnet") {
-      return dnaUrls.ethereum;
-    }
-    if (network === "sepolia") {
-      return dnaUrls.ethereumSepolia;
-    }
+export function getDnaUrl(network: Network) {
+  if (network === "other") {
+    throw new Error(red("✖") + " A custom network requires a DNA URL");
   }
 
-  if (chain === "beaconchain") {
-    if (network === "mainnet") {
-      return dnaUrls.beaconchain;
-    }
-  }
-
-  if (chain === "starknet") {
-    if (network === "mainnet") {
-      return dnaUrls.starknet;
-    }
-    if (network === "sepolia") {
-      return dnaUrls.starknetSepolia;
-    }
-  }
-
-  throw new Error(red("✖") + " Invalid chain or network");
+  return dnaUrls[network];
 }
 
 /**

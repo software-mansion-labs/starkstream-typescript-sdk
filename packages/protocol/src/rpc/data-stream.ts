@@ -68,11 +68,11 @@ export class RpcDataStream<TFilter, TBlock> {
     ]);
 
     if (finalized === null) {
-      throw new Error("EvmRpcStream requires a finalized block");
+      throw new Error("RpcDataStream requires a finalized block");
     }
 
     if (head === null) {
-      throw new Error("EvmRpcStream requires a chain with blocks.");
+      throw new Error("RpcDataStream requires a chain with blocks.");
     }
 
     const chainTracker = createChainTracker({

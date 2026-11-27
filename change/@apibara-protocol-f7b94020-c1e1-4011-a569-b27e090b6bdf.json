@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Use chain-independent errors for RPC streams.",
+  "packageName": "@apibara/protocol",
+  "email": "makow.088@gmail.com",
+  "dependentChangeType": "none"
+}

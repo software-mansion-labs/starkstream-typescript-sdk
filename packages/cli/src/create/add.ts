@@ -3,10 +3,9 @@ import consola from "consola";
 import prompts from "prompts";
 import { cyan, red, reset } from "./colors";
 import {
-  type ChainDataType,
   type NetworkDataType,
   type StorageDataType,
-  chains,
+  networks,
   storages,
 } from "./constants";
 import { initializeProject } from "./init";
@@ -16,7 +15,7 @@ import {
   updateApibaraConfigFile,
   updatePackageJson,
 } from "./templates";
-import type { Chain, IndexerOptions, Network, Storage } from "./types";
+import type { IndexerOptions, Network, Storage } from "./types";
 import {
   cancelOperation,
   checkFileExists,
@@ -24,7 +23,6 @@ import {
   getApibaraConfigLanguage,
   getPackageManager,
   hasApibaraConfig,
-  validateChain,
   validateDnaUrl,
   validateIndexerId,
   validateNetwork,
@@ -80,8 +78,10 @@ export async function addIndexer({
   const { language, extension } = getApibaraConfigLanguage(cwd);
 
   validateIndexerId(argIndexerId, true);
-  validateChain(argChain, true);
-  validateNetwork(argChain, argNetwork, true);
+  if (argChain !== undefined && argChain !== "starknet") {
+    throw new Error(`Unsupported chain "${argChain}". Use --chain starknet.`);
+  }
+  validateNetwork(argNetwork, true);
   validateStorage(argStorage, true);
   validateDnaUrl(argDnaUrl, true);
 
@@ -104,46 +104,19 @@ export async function addIndexer({
             : "Invalid indexer ID, it cannot be empty and must be in kebab-case format",
       },
       {
-        type: argChain ? null : "select",
-        name: "prompt_chain",
-        message: reset("Select a chain:"),
-        choices: chains.map((chain) => ({
-          title: chain.color(chain.display),
-          value: chain,
-        })),
-      },
-      {
         type: argNetwork ? null : "select",
         name: "prompt_network",
         message: reset("Select a network:"),
-        choices: (chain: ChainDataType | undefined) => [
-          ...(
-            chain?.networks ??
-            chains.find((c) => c.name === argChain)?.networks ??
-            []
-          ).map((network) => ({
-            title: network.color(network.display),
-            value: network,
-          })),
-          {
-            title: cyan("Other"),
-            value: {
-              color: cyan,
-              display: "Other",
-              name: "other",
-            } as NetworkDataType,
-          },
-        ],
+        choices: networks.map((network) => ({
+          title: network.color(network.display),
+          value: network,
+        })),
       },
       {
-        type: (network: NetworkDataType | undefined) => {
-          if (network || argNetwork) {
-            return network?.name === "other" || argNetwork === "other"
-              ? "text"
-              : null;
-          }
-          return null;
-        },
+        type: (network: NetworkDataType | undefined) =>
+          !argDnaUrl && (argNetwork ?? network?.name) === "other"
+            ? "text"
+            : null,
         name: "prompt_dnaUrl",
         message: reset("Enter a DNA URL:"),
         validate: (url) => validateDnaUrl(url) || "Provide a valid DNA Url",
@@ -165,26 +138,16 @@ export async function addIndexer({
     },
   );
 
-  const {
-    prompt_indexerId,
-    prompt_chain,
-    prompt_network,
-    prompt_storage,
-    prompt_dnaUrl,
-  } = result as {
-    prompt_indexerId: string | undefined;
-    prompt_chain: ChainDataType | undefined;
-    prompt_network: NetworkDataType | undefined;
-    prompt_storage: StorageDataType | undefined;
-    prompt_dnaUrl: string | undefined;
-  };
+  const { prompt_indexerId, prompt_network, prompt_storage, prompt_dnaUrl } =
+    result as {
+      prompt_indexerId: string | undefined;
+      prompt_network: NetworkDataType | undefined;
+      prompt_storage: StorageDataType | undefined;
+      prompt_dnaUrl: string | undefined;
+    };
 
   if (!argIndexerId && !prompt_indexerId) {
     throw new Error(red("✖") + " Indexer ID is required");
-  }
-
-  if (!argChain && !prompt_chain) {
-    throw new Error(red("✖") + " Chain is required");
   }
 
   if (!argNetwork && !prompt_network) {
@@ -199,7 +162,6 @@ export async function addIndexer({
     cwd: cwd,
     indexerFileId,
     indexerId: convertKebabToCamelCase(indexerFileId),
-    chain: (argChain as Chain) ?? prompt_chain?.name!,
     network: (argNetwork as Network) ?? prompt_network?.name!,
     storage: (argStorage as Storage) ?? prompt_storage?.name!,
     dnaUrl: argDnaUrl ?? prompt_dnaUrl,
