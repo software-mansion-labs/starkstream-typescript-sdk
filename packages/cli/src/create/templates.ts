@@ -10,20 +10,20 @@ import { checkFileExists, formatFile, getDnaUrl } from "./utils";
 
 export function generatePackageJson(isTypeScript: boolean) {
   return {
-    name: "apibara-app",
+    name: "starkstream-app",
     version: "0.1.0",
     private: true,
     type: "module",
     scripts: {
-      ...(isTypeScript && { prepare: "apibara prepare" }),
-      dev: "apibara dev",
-      start: "apibara start",
-      build: "apibara build",
+      ...(isTypeScript && { prepare: "starkstream prepare" }),
+      dev: "starkstream dev",
+      start: "starkstream start",
+      build: "starkstream build",
       ...(isTypeScript && { typecheck: "tsc --noEmit" }),
     },
     dependencies: {
-      "@apibara/protocol": packageVersions["@apibara/protocol"],
-      apibara: packageVersions.apibara,
+      "@starkstream/protocol": packageVersions["@starkstream/protocol"],
+      starkstream: packageVersions.starkstream,
     },
     devDependencies: {
       ...(isTypeScript && {
@@ -50,13 +50,13 @@ export function generateTsConfig() {
       strict: true,
       baseUrl: ".",
     },
-    include: [".", "./.apibara/types"],
+    include: [".", "./.starkstream/types"],
     exclude: ["node_modules"],
   };
 }
 
-export function generateApibaraConfig(isTypeScript: boolean) {
-  return `import { defineConfig } from "apibara/config";
+export function generateStarkstreamConfig(isTypeScript: boolean) {
+  return `import { defineConfig } from "starkstream/config";
 
 export default defineConfig({
   runtimeConfig: {},
@@ -68,16 +68,16 @@ export function generateIndexer({
   storage,
   language,
 }: IndexerOptions) {
-  return `import { defineIndexer } from "apibara/indexer";
-import { useLogger } from "apibara/plugins";
-${storage === "postgres" ? `import { drizzleStorage } from "@apibara/plugin-drizzle";` : ""}
-${storage === "postgres" ? `import { drizzle } from "@apibara/plugin-drizzle";` : ""}
-import { StarknetStream } from "@apibara/starknet";
-${language === "typescript" ? `import type { ApibaraRuntimeConfig } from "apibara/types";` : ""}
+  return `import { defineIndexer } from "starkstream/indexer";
+import { useLogger } from "starkstream/plugins";
+${storage === "postgres" ? `import { drizzleStorage } from "@starkstream/plugin-drizzle";` : ""}
+${storage === "postgres" ? `import { drizzle } from "@starkstream/plugin-drizzle";` : ""}
+import { StarknetStream } from "@starkstream/starknet";
+${language === "typescript" ? `import type { StarkstreamRuntimeConfig } from "starkstream/types";` : ""}
 ${storage === "postgres" ? `import * as schema from "../lib/schema";` : ""}
 
 
-export default function (runtimeConfig${language === "typescript" ? ": ApibaraRuntimeConfig" : ""}) {
+export default function (runtimeConfig${language === "typescript" ? ": StarkstreamRuntimeConfig" : ""}) {
   const { startingBlock, streamUrl } = runtimeConfig["${indexerId}"];
   ${
     storage === "postgres"
@@ -152,15 +152,15 @@ export async function updatePackageJson({
 
   const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
 
-  packageJson.dependencies["@apibara/starknet"] =
-    packageVersions["@apibara/starknet"];
+  packageJson.dependencies["@starkstream/starknet"] =
+    packageVersions["@starkstream/starknet"];
 
   if (storage === "postgres") {
     packageJson.scripts["drizzle:generate"] = "drizzle-kit generate";
     packageJson.scripts["drizzle:migrate"] = "drizzle-kit migrate";
 
-    packageJson.dependencies["@apibara/plugin-drizzle"] =
-      packageVersions["@apibara/plugin-drizzle"];
+    packageJson.dependencies["@starkstream/plugin-drizzle"] =
+      packageVersions["@starkstream/plugin-drizzle"];
 
     packageJson.dependencies["drizzle-orm"] = packageVersions["drizzle-orm"];
 
@@ -181,7 +181,7 @@ export async function updatePackageJson({
   await formatFile(packageJsonPath);
 }
 
-export async function updateApibaraConfigFile({
+export async function updateStarkstreamConfigFile({
   indexerId,
   cwd,
   storage,
@@ -190,7 +190,7 @@ export async function updateApibaraConfigFile({
   dnaUrl,
   extension,
 }: IndexerOptions) {
-  const pathToConfig = path.join(cwd, `apibara.config.${extension}`);
+  const pathToConfig = path.join(cwd, `starkstream.config.${extension}`);
 
   const runtimeConfigString = `{
   startingBlock: 0,
@@ -384,8 +384,8 @@ const gitIgnoreItems: {
   },
   {
     isRecommended: true,
-    description: "build and dev files of apibara",
-    value: ".apibara",
+    description: "build and dev files of starkstream",
+    value: ".starkstream",
   },
   {
     isRecommended: false,

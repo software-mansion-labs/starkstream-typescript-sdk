@@ -1,11 +1,11 @@
-import { checkForUnknownArgs } from "apibara/common";
-import { initializeProject } from "apibara/create";
 import { defineCommand } from "citty";
+import { checkForUnknownArgs } from "starkstream/common";
+import { initializeProject } from "starkstream/create";
 
 export default defineCommand({
   meta: {
     name: "init",
-    description: "Initialize a new Apibara project",
+    description: "Initialize a new Starkstream project",
   },
   args: {
     dir: {

@@ -1,4 +1,4 @@
-# Change Log - @apibara/plugin-health
+# Change Log - @starkstream/plugin-health
 
 <!-- This log was last generated on Fri, 13 Mar 2026 10:35:02 GMT and should not be manually modified. -->
 

@@ -1,4 +1,4 @@
-import { type Cursor, normalizeCursor } from "@apibara/protocol";
+import { type Cursor, normalizeCursor } from "@starkstream/protocol";
 import type { ClientSession, Db } from "mongodb";
 import { MongoStorageError } from "./utils";
 

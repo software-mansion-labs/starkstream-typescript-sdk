@@ -1,14 +1,14 @@
-import { useIndexerContext } from "@apibara/indexer";
-import { defineIndexerPlugin, useLogger } from "@apibara/indexer/plugins";
+import { useIndexerContext } from "@starkstream/indexer";
+import { defineIndexerPlugin, useLogger } from "@starkstream/indexer/plugins";
 
 import type {
   ExtractTablesWithRelations,
   TablesRelationalConfig,
 } from "drizzle-orm";
 
-import { generateIndexerId } from "@apibara/indexer/internal";
-import { useInternalContext } from "@apibara/indexer/internal/plugins";
-import type { Cursor, DataFinality } from "@apibara/protocol";
+import { generateIndexerId } from "@starkstream/indexer/internal";
+import { useInternalContext } from "@starkstream/indexer/internal/plugins";
+import type { Cursor, DataFinality } from "@starkstream/protocol";
 import type {
   PgDatabase,
   PgQueryResultHKT,
@@ -188,7 +188,7 @@ export function drizzleStorage<
   return defineIndexerPlugin<TFilter, TBlock>((indexer) => {
     let tableNames: string[] = [];
     let indexerId = "";
-    const alwaysReindex = process.env["APIBARA_ALWAYS_REINDEX"] === "true";
+    const alwaysReindex = process.env["STARKSTREAM_ALWAYS_REINDEX"] === "true";
     let prevFinality: DataFinality | undefined;
     // Middleware execution is sequential. If concurrent block handling is introduced,
     // this flag will need synchronization.

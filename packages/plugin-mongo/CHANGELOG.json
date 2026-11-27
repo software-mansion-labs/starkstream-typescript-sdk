@@ -1,5 +1,5 @@
 {
-  "name": "@apibara/plugin-mongo",
+  "name": "@starkstream/plugin-mongo",
   "entries": [
     {
       "date": "Fri, 24 Apr 2026 17:44:08 GMT",

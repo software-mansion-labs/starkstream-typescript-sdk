@@ -1,10 +1,10 @@
 import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { defineCommand, runMain } from "citty";
 import {
   getProcessedRuntimeConfig,
   getRuntimeDataFromEnv,
-} from "apibara/common";
-import { defineCommand, runMain } from "citty";
+} from "starkstream/common";
 import { availableIndexers, createIndexer } from "./internal/app";
 
 type ProjectInfo = {
@@ -67,7 +67,7 @@ const startCommand = defineCommand({
     }
 
     const projectInfoPath = resolve(
-      args["build-dir"] ?? ".apibara",
+      args["build-dir"] ?? ".starkstream",
       "project-info.json",
     );
 

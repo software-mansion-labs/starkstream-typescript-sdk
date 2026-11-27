@@ -1,4 +1,4 @@
-import type { ConsolaReporter } from "@apibara/indexer/plugins";
+import type { ConsolaReporter } from "@starkstream/indexer/plugins";
 import type {
   C12InputConfig,
   ConfigWatcher,
@@ -9,7 +9,7 @@ import type { NestedHooks } from "hookable";
 import type { WatchOptions } from "rolldown";
 import type { RolldownOptions } from "rolldown";
 import type { DeepPartial } from "./_utils";
-import type { ApibaraHooks } from "./hooks";
+import type { StarkstreamHooks } from "./hooks";
 
 export type RegisterFn = () => Promise<void>;
 
@@ -26,23 +26,23 @@ export type LoggerFactoryArgs = {
 };
 
 /**
- * Apibara Config type (apibara.config)
+ * Starkstream Config type (starkstream.config)
  */
-export interface ApibaraConfig<
+export interface StarkstreamConfig<
   T extends Record<
     string,
-    DeepPartial<Pick<ApibaraConfig<T, R>, "runtimeConfig">>
+    DeepPartial<Pick<StarkstreamConfig<T, R>, "runtimeConfig">>
   > = Record<string, never>,
   R extends Record<string, unknown> = Record<string, never>,
-> extends Partial<Omit<ApibaraOptions<T, R>, "preset" | "presets" | "dev">>,
-    C12InputConfig<ApibaraConfig<T, R>> {
+> extends Partial<Omit<StarkstreamOptions<T, R>, "preset" | "presets" | "dev">>,
+    C12InputConfig<StarkstreamConfig<T, R>> {
   runtimeConfig?: R;
   presets?: T;
   preset?: keyof T;
 }
 
-export type ApibaraDynamicConfig = Pick<
-  ApibaraConfig,
+export type StarkstreamDynamicConfig = Pick<
+  StarkstreamConfig,
   "runtimeConfig" | "preset" | "presets"
 >;
 
@@ -54,18 +54,18 @@ export interface LoadConfigOptions {
   c12?: WatchConfigOptions;
 }
 
-export interface ApibaraOptions<
+export interface StarkstreamOptions<
   T extends Record<
     string,
-    DeepPartial<Pick<ApibaraConfig<T, R>, "runtimeConfig">>
+    DeepPartial<Pick<StarkstreamConfig<T, R>, "runtimeConfig">>
   > = Record<string, never>,
   R extends Record<string, unknown> = Record<string, never>,
 > {
   // Internal
-  _config: ApibaraConfig<T, R>;
+  _config: StarkstreamConfig<T, R>;
   _c12:
-    | ResolvedConfig<ApibaraConfig<T, R>>
-    | ConfigWatcher<ApibaraConfig<T, R>>;
+    | ResolvedConfig<StarkstreamConfig<T, R>>
+    | ConfigWatcher<StarkstreamConfig<T, R>>;
 
   // Presets
   presets?: T;
@@ -85,7 +85,7 @@ export interface ApibaraOptions<
   watchOptions: WatchOptions["watch"];
 
   // Hooks
-  hooks: NestedHooks<ApibaraHooks>;
+  hooks: NestedHooks<StarkstreamHooks>;
 
   // Rolldown
   rolldownConfig?: Partial<RolldownOptions>;

@@ -1,4 +1,4 @@
-import { type Cursor, normalizeCursor } from "@apibara/protocol";
+import { type Cursor, normalizeCursor } from "@starkstream/protocol";
 import type { Database } from "better-sqlite3";
 
 import { assertInTransaction, deserialize, serialize } from "./utils";

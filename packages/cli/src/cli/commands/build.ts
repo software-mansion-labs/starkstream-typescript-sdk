@@ -1,8 +1,13 @@
-import { checkForUnknownArgs, commonArgs } from "apibara/common";
-import { build, createApibara, prepare, writeTypes } from "apibara/core";
-import { runtimeDir } from "apibara/runtime/meta";
 import { defineCommand } from "citty";
 import { join, resolve } from "pathe";
+import { checkForUnknownArgs, commonArgs } from "starkstream/common";
+import {
+  build,
+  createStarkstream,
+  prepare,
+  writeTypes,
+} from "starkstream/core";
+import { runtimeDir } from "starkstream/runtime/meta";
 
 export default defineCommand({
   meta: {
@@ -17,15 +22,15 @@ export default defineCommand({
 
     const rootDir = resolve((args.dir || args._dir || ".") as string);
 
-    const apibara = await createApibara({
+    const starkstream = await createStarkstream({
       rootDir,
     });
 
-    apibara.options.entry = join(runtimeDir, "start.mjs");
+    starkstream.options.entry = join(runtimeDir, "start.mjs");
 
-    await prepare(apibara);
-    await writeTypes(apibara);
-    await build(apibara);
-    await apibara.close();
+    await prepare(starkstream);
+    await writeTypes(starkstream);
+    await build(starkstream);
+    await starkstream.close();
   },
 });

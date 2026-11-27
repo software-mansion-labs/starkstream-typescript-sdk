@@ -1,4 +1,4 @@
-# `@apibara/plugin-sqlite`
+# `@starkstream/plugin-sqlite`
 
 TODO
 

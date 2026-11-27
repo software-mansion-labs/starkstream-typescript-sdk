@@ -1,12 +1,15 @@
-# Apibara Typescript Libraries
+# Starkstream TypeScript SDK
 
-This monorepo contains the Apibara TypeScript and JavaScript libraries for Starknet. For existing EVM, EVM RPC, and Beacon Chain indexers, keep using the corresponding published Apibara packages.
+Use `starkstream` to create and run Starknet indexers. The workspace also includes a [DNA client](packages/protocol) and [Starknet block and filter types](packages/starknet).
 
- - [`@apibara/protocol`](https://github.com/apibara/typescript-sdk/tree/main/packages/protocol): provides a client to connect to an Apibara stream.
- - [`@apibara/starknet`](https://github.com/apibara/typescript-sdk/tree/main/packages/starknet): provides types to parse StarkNet data.
+## Migrating an existing indexer
 
-For more information, refer to each library's README file.
+For existing EVM, EVM RPC, and Beacon Chain indexers, keep using the corresponding Apibara packages. For Starknet indexers, follow the steps below.
 
+- Replace the `apibara` dependency and CLI command with `starkstream`. Change `@apibara/*` dependencies and imports to `@starkstream/*`, including subpaths such as `@starkstream/protocol/codec`.
+- Rename `apibara.config.*` to `starkstream.config.*` and update CLI subpath imports such as `starkstream/config`. Rename branded types and functions, for example `ApibaraRuntimeConfig` to `StarkstreamRuntimeConfig` and `createApibara` to `createStarkstream`.
+- Rename `APIBARA_RUNTIME_CONFIG` and `APIBARA_ALWAYS_REINDEX` to `STARKSTREAM_RUNTIME_CONFIG` and `STARKSTREAM_ALWAYS_REINDEX`. Stream authentication still uses `DNA_TOKEN`.
+- Update build and type paths from `.apibara/` to `.starkstream/`. After installing the new dependencies, run `starkstream prepare` to regenerate types and `starkstream build` to rebuild the indexer.
 
 ## Getting started
 

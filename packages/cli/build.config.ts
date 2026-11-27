@@ -35,17 +35,17 @@ export default defineBuildConfig({
   outDir: "./dist",
   declaration: true,
   alias: {
-    "apibara/runtime/meta": resolve(srcDir, "../runtime-meta.mjs"),
+    "starkstream/runtime/meta": resolve(srcDir, "../runtime-meta.mjs"),
     ...Object.fromEntries(
       modules.map((module) => [
-        `apibara/${module}`,
+        `starkstream/${module}`,
         resolve(srcDir, `${module}/index.ts`),
       ]),
     ),
   },
   externals: [
-    "apibara/runtime/meta",
-    ...modules.map((module) => `apibara/${module}`),
+    "starkstream/runtime/meta",
+    ...modules.map((module) => `starkstream/${module}`),
   ],
   hooks: {
     "build:before": () => {

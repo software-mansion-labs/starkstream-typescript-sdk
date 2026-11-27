@@ -1,4 +1,4 @@
-import { StreamConfig } from "@apibara/protocol";
+import { StreamConfig } from "@starkstream/protocol";
 export type { Abi } from "abi-wan-kanabi";
 import { BlockFromBytes } from "./block";
 import { FilterFromBytes, mergeFilter } from "./filter";

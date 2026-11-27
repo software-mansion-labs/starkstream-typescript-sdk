@@ -1,6 +1,5 @@
 import { existsSync } from "node:fs";
 import { builtinModules } from "node:module";
-import type { Apibara } from "apibara/types";
 import defu from "defu";
 import { join } from "pathe";
 import type {
@@ -8,6 +7,7 @@ import type {
   RolldownOptions,
   RolldownPluginOption,
 } from "rolldown";
+import type { Starkstream } from "starkstream/types";
 import { indexers } from "./plugins/indexers";
 import { instrumentation } from "./plugins/instrumentation";
 import { staticConfig } from "./plugins/static-config";
@@ -24,7 +24,7 @@ const runtimeDependencies = [
   "encoding",
 ];
 
-export function getRolldownConfig(apibara: Apibara): RolldownOptions {
+export function getRolldownConfig(starkstream: Starkstream): RolldownOptions {
   const extensions: string[] = [
     ".ts",
     ".mjs",
@@ -36,19 +36,19 @@ export function getRolldownConfig(apibara: Apibara): RolldownOptions {
   ];
 
   const tsConfigExists = existsSync(
-    join(apibara.options.rootDir, "tsconfig.json"),
+    join(starkstream.options.rootDir, "tsconfig.json"),
   );
 
   const rolldownConfig: RolldownOptions & {
     plugins: RolldownPluginOption[];
   } = defu(
-    // biome-ignore lint/suspicious/noExplicitAny: apibara.options.rolldownConfig is typed
-    apibara.options.rolldownConfig as any,
+    // biome-ignore lint/suspicious/noExplicitAny: starkstream.options.rolldownConfig is typed
+    starkstream.options.rolldownConfig as any,
     <ConfigExport>{
       platform: "node",
-      input: apibara.options.entry,
+      input: starkstream.options.entry,
       output: {
-        dir: join(apibara.options.outputDir || "./.apibara/build"),
+        dir: join(starkstream.options.outputDir || "./.starkstream/build"),
         format: "esm",
         entryFileNames: "[name].mjs",
         chunkFileNames: "chunks/[name]-[hash].mjs",
@@ -69,9 +69,9 @@ export function getRolldownConfig(apibara: Apibara): RolldownOptions {
       },
       resolve: {
         extensions,
-        preferBuiltins: !!apibara.options.node,
+        preferBuiltins: !!starkstream.options.node,
         mainFields: ["main"],
-        exportConditions: apibara.options.exportConditions,
+        exportConditions: starkstream.options.exportConditions,
         tsconfigFilename: tsConfigExists ? "tsconfig.json" : undefined,
       },
       treeshake: true,
@@ -79,8 +79,8 @@ export function getRolldownConfig(apibara: Apibara): RolldownOptions {
     },
   );
 
-  rolldownConfig.plugins?.push(staticConfig(apibara));
-  rolldownConfig.plugins?.push(instrumentation(apibara));
-  rolldownConfig.plugins?.push(indexers(apibara));
+  rolldownConfig.plugins?.push(staticConfig(starkstream));
+  rolldownConfig.plugins?.push(instrumentation(starkstream));
+  rolldownConfig.plugins?.push(indexers(starkstream));
   return rolldownConfig;
 }

@@ -1,48 +1,26 @@
-# `@apibara/protocol`
+# `@starkstream/protocol`
 
-This package provides a gRPC client to interact with an [Apibara streaming server](https://www.apibara.com/docs/streaming-protocol).
+This package provides a gRPC client for the [Starkstream DNA protocol](https://starkstream.io/docs/dna/protocol).
 
 ## Installation
 
 ```bash
-npm add @apibara/protocol
+npm add @starkstream/protocol
 ```
 
 ## Usage
 
-The package exports a `NodeClient` used to interact with the server.
-The client has two methods:
-
- - `status`: returns the indexing status of the node. 
- - `streamMessages`: returns a node.js `Stream` with the messages from the server.
+To check the Starknet testnet stream, also install `@starkstream/starknet` and set `DNA_TOKEN` to your API key.
 
 ```ts
-import { NodeClient, credentials } from '@apibara/protocol'
+import { createAuthenticatedClient } from "@starkstream/protocol";
+import { StarknetStream } from "@starkstream/starknet";
 
-async function main() {
-  // create client connected to the StarkNet Goerli stream
-  // the server uses ssl
-  const node = new NodeClient(
-    'goerli.starknet.stream.apibara.com:443',
-    credentials.createSsl()
-  )
-
-  // check server status
-  const status = await node.status()
-
-  // stream all messages from the server
-  // returns a promise resolved when it finishes
-  // streaming from the server
-  const messages = node.streamMessages()
-  return new Promise((resolve, reject) => {
-    messages.on('end', resolve)
-    messages.on('error', reject)
-    messages.on('data', (data) => {
-      console.log(data)
-    })
-  })
-}
+const client = createAuthenticatedClient(StarknetStream, "https://testnet.starkstream.io");
+console.log(await client.status());
 ```
+
+Use `client.streamData(request)` to iterate over stream messages.
 
 ## License
 

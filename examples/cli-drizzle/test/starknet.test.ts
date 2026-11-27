@@ -1,10 +1,10 @@
-import { createVcr } from "apibara/testing";
+import { createVcr } from "starkstream/testing";
 import { describe, expect, it } from "vitest";
 
 import createIndexer from "@/indexers/2-starknet.indexer";
 
 import { starknetUsdcTransfers } from "@/lib/schema";
-import { getTestDatabase } from "@apibara/plugin-drizzle/testing";
+import { getTestDatabase } from "@starkstream/plugin-drizzle/testing";
 
 const vcr = createVcr();
 

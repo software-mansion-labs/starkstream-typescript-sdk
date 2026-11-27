@@ -1,4 +1,4 @@
-import { type Cursor, isCursor } from "@apibara/protocol";
+import { type Cursor, isCursor } from "@starkstream/protocol";
 
 import { defineIndexerPlugin } from "./config";
 

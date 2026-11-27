@@ -1,4 +1,4 @@
-export * from "./apibara";
+export * from "./starkstream";
 export * from "./_utils";
 export * from "./config";
 export * from "./hooks";

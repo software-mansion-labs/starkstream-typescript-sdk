@@ -1,12 +1,12 @@
-import { checkForUnknownArgs } from "apibara/common";
-import { addIndexer } from "apibara/create";
 import { defineCommand } from "citty";
+import { checkForUnknownArgs } from "starkstream/common";
+import { addIndexer } from "starkstream/create";
 
 export default defineCommand({
   meta: {
     name: "add",
     description:
-      "apibara add helps you add a new indexer to your project with sensible defaults.",
+      "starkstream add helps you add a new indexer to your project with sensible defaults.",
   },
   args: {
     indexerId: {
@@ -28,12 +28,12 @@ export default defineCommand({
     },
     dnaUrl: {
       type: "string",
-      description: "DNA URL - https://custom-dna-url.apibara.org",
+      description: "DNA URL - https://dna.example.com",
     },
     dir: {
       type: "string",
       description:
-        "Root directory - apibara project root where apibara.config is located | default: current working directory",
+        "Root directory - starkstream project root where starkstream.config is located | default: current working directory",
     },
   },
   async run({ args, cmd }) {

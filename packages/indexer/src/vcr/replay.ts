@@ -1,8 +1,8 @@
 import assert from "node:assert";
 import fs from "node:fs";
 import path from "node:path";
-import type { Client } from "@apibara/protocol";
-import { MockClient } from "@apibara/protocol/testing";
+import type { Client } from "@starkstream/protocol";
+import { MockClient } from "@starkstream/protocol/testing";
 import { type Indexer, run } from "../indexer";
 import { type CassetteDataType, deserialize } from "../vcr";
 import type { VcrConfig } from "./config";

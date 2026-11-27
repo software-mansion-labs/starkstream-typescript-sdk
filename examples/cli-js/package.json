@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
-    "dev": "apibara dev",
+    "dev": "starkstream dev",
     "lint": "biome check .",
-    "start": "apibara start",
+    "start": "starkstream start",
     "lint:fix": "pnpm lint --write"
   },
   "keywords": [],
@@ -17,11 +17,11 @@
     "typescript": "^5.6.2"
   },
   "dependencies": {
-    "@apibara/indexer": "workspace:*",
-    "@apibara/protocol": "workspace:*",
-    "@apibara/starknet": "workspace:*",
-    "@apibara/plugin-health": "workspace:*",
-    "apibara": "workspace:*",
+    "@starkstream/indexer": "workspace:*",
+    "@starkstream/protocol": "workspace:*",
+    "@starkstream/starknet": "workspace:*",
+    "@starkstream/plugin-health": "workspace:*",
+    "starkstream": "workspace:*",
     "starknet": "^6.11.0"
   }
 }

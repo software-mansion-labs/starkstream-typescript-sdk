@@ -1,4 +1,4 @@
-import type { VcrResult } from "@apibara/indexer/testing";
+import type { VcrResult } from "@starkstream/indexer/testing";
 import type { PgDatabase, PgQueryResultHKT } from "drizzle-orm/pg-core";
 import { DRIZZLE_STORAGE_DB_PROPERTY } from "./constants";
 

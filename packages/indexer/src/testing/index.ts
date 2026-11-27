@@ -1,4 +1,4 @@
-import { createAuthenticatedClient } from "@apibara/protocol";
+import { createAuthenticatedClient } from "@starkstream/protocol";
 import ci from "ci-info";
 import { type NestedHooks, mergeHooks } from "hookable";
 import { useIndexerContext } from "../context";

@@ -1,22 +1,26 @@
-import { getRolldownConfig } from "apibara/rolldown";
-import type { Apibara } from "apibara/types";
 import { colors } from "consola/utils";
+import { getRolldownConfig } from "starkstream/rolldown";
+import type { Starkstream } from "starkstream/types";
 import { watchDev } from "./dev";
 import { buildProduction } from "./prod";
 
-export async function build(apibara: Apibara) {
-  const rolldownConfig = getRolldownConfig(apibara);
+export async function build(starkstream: Starkstream) {
+  const rolldownConfig = getRolldownConfig(starkstream);
 
-  await apibara.hooks.callHook("rolldown:before", apibara, rolldownConfig);
+  await starkstream.hooks.callHook(
+    "rolldown:before",
+    starkstream,
+    rolldownConfig,
+  );
 
-  if (apibara.options.rollupConfig) {
-    apibara.logger.error(
-      `\n${colors.cyan("apibara.config:")} rollupConfig is deprecated. Use rolldownConfig instead`,
+  if (starkstream.options.rollupConfig) {
+    starkstream.logger.error(
+      `\n${colors.cyan("starkstream.config:")} rollupConfig is deprecated. Use rolldownConfig instead`,
     );
     process.exit(1);
   }
 
-  return apibara.options.dev
-    ? await watchDev(apibara, rolldownConfig)
-    : await buildProduction(apibara, rolldownConfig);
+  return starkstream.options.dev
+    ? await watchDev(starkstream, rolldownConfig)
+    : await buildProduction(starkstream, rolldownConfig);
 }

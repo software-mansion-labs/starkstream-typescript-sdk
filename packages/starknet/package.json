@@ -1,7 +1,7 @@
 {
-  "name": "@apibara/starknet",
+  "name": "@starkstream/starknet",
   "version": "2.1.4",
-  "repository": "apibara/typescript-sdk",
+  "repository": "software-mansion-labs/starkstream-typescript-sdk",
   "type": "module",
   "files": [
     "dist",
@@ -43,7 +43,7 @@
     "vitest": "^1.6.0"
   },
   "dependencies": {
-    "@apibara/protocol": "workspace:*",
+    "@starkstream/protocol": "workspace:*",
     "@scure/starknet": "^1.1.0",
     "abi-wan-kanabi": "^2.2.4",
     "long": "^5.2.1",

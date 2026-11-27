@@ -1,4 +1,4 @@
-# Change Log - @apibara/indexer
+# Change Log - @starkstream/indexer
 
 <!-- This log was last generated on Wed, 22 Apr 2026 12:58:39 GMT and should not be manually modified. -->
 

@@ -1,11 +1,11 @@
 import { metrics, trace } from "@opentelemetry/api";
 
 export function createTracer() {
-  return trace.getTracer("@apibara/indexer");
+  return trace.getTracer("@starkstream/indexer");
 }
 
 export function createIndexerMetrics() {
-  const meter = metrics.getMeter("@apibara/indexer");
+  const meter = metrics.getMeter("@starkstream/indexer");
 
   const currentBlockGauge = meter.createGauge("current_block", {
     description: "Current block number being processed",

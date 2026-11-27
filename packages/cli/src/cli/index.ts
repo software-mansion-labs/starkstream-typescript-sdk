@@ -2,8 +2,8 @@ import { defineCommand, runMain } from "citty";
 
 export const mainCli = defineCommand({
   meta: {
-    name: "apibara",
-    description: "Apibara CLI",
+    name: "starkstream",
+    description: "Starkstream CLI",
     version: "2.0.0",
   },
   subCommands: {

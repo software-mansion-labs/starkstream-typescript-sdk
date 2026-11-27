@@ -1,4 +1,4 @@
-import { type Cursor, normalizeCursor } from "@apibara/protocol";
+import { type Cursor, normalizeCursor } from "@starkstream/protocol";
 import { and, eq, gt, isNull, lt, sql } from "drizzle-orm";
 import type {
   ExtractTablesWithRelations,

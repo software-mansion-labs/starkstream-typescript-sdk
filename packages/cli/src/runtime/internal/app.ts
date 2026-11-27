@@ -1,16 +1,16 @@
-import { createIndexer as _createIndexer } from "@apibara/indexer";
+import { createIndexer as _createIndexer } from "@starkstream/indexer";
 import {
   type InternalContext,
   internalContext,
-} from "@apibara/indexer/internal/plugins";
+} from "@starkstream/indexer/internal/plugins";
 import {
   type ConsolaReporter,
   inMemoryPersistence,
   logger,
-} from "@apibara/indexer/plugins";
+} from "@starkstream/indexer/plugins";
 import consola from "consola";
-import { indexers } from "#apibara-internal-virtual/indexers";
-import { logger as instrumentationLogger } from "#apibara-internal-virtual/instrumentation";
+import { indexers } from "#starkstream-internal-virtual/indexers";
+import { logger as instrumentationLogger } from "#starkstream-internal-virtual/instrumentation";
 import { createLogger } from "./logger";
 
 export const availableIndexers = indexers.map((i) => i.name);

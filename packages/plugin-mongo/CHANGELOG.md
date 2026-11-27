@@ -1,4 +1,4 @@
-# Change Log - @apibara/plugin-mongo
+# Change Log - @starkstream/plugin-mongo
 
 <!-- This log was last generated on Fri, 24 Apr 2026 17:44:08 GMT and should not be manually modified. -->
 

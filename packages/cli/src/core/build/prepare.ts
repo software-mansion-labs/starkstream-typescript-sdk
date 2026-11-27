@@ -1,15 +1,15 @@
 import fsp from "node:fs/promises";
-import type { Apibara } from "apibara/types";
 import fse from "fs-extra";
+import type { Starkstream } from "starkstream/types";
 import { prettyPath } from "../path";
 
-export async function prepare(apibara: Apibara) {
-  await prepareDir(apibara.options.buildDir);
-  await prepareDir(apibara.options.outputDir);
+export async function prepare(starkstream: Starkstream) {
+  await prepareDir(starkstream.options.buildDir);
+  await prepareDir(starkstream.options.outputDir);
 
-  if (!apibara.options.disableLogs) {
-    apibara.logger.success(
-      `Output directory ${prettyPath(apibara.options.outputDir)} cleaned`,
+  if (!starkstream.options.disableLogs) {
+    starkstream.logger.success(
+      `Output directory ${prettyPath(starkstream.options.outputDir)} cleaned`,
     );
   }
 }

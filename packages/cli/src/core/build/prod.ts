@@ -1,14 +1,14 @@
-import type { Apibara } from "apibara/types";
 import { colors } from "consola/utils";
 import * as rolldown from "rolldown";
+import type { Starkstream } from "starkstream/types";
 
 export async function buildProduction(
-  apibara: Apibara,
+  starkstream: Starkstream,
   rolldownConfig: rolldown.RolldownOptions,
 ) {
-  if (!apibara.options.disableLogs) {
-    apibara.logger.start(
-      `Building ${colors.cyan(apibara.indexers.length)} indexers`,
+  if (!starkstream.options.disableLogs) {
+    starkstream.logger.start(
+      `Building ${colors.cyan(starkstream.indexers.length)} indexers`,
     );
   }
 
@@ -32,14 +32,14 @@ export async function buildProduction(
     const endTime = Date.now();
     const duration = endTime - startTime;
 
-    if (!apibara.options.disableLogs) {
-      apibara.logger.success(`Build succeeded in ${duration}ms`);
-      apibara.logger.info(
-        `You can start the indexers with ${colors.cyan("apibara start")}`,
+    if (!starkstream.options.disableLogs) {
+      starkstream.logger.success(`Build succeeded in ${duration}ms`);
+      starkstream.logger.info(
+        `You can start the indexers with ${colors.cyan("starkstream start")}`,
       );
     }
   } catch (error) {
-    apibara.logger.error("Build failed", error);
+    starkstream.logger.error("Build failed", error);
     throw error;
   }
 }

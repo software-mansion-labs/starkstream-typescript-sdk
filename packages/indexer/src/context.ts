@@ -1,5 +1,5 @@
 import { AsyncLocalStorage } from "node:async_hooks";
-import type { Cursor, DataFinality } from "@apibara/protocol";
+import type { Cursor, DataFinality } from "@starkstream/protocol";
 import { getContext } from "unctx";
 
 // biome-ignore lint/suspicious/noExplicitAny: context type

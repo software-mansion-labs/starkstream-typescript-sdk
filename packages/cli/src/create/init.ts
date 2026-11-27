@@ -6,8 +6,8 @@ import { addIndexer } from "./add";
 import { cyan, green } from "./colors";
 import {
   createGitIgnoreFile,
-  generateApibaraConfig,
   generatePackageJson,
+  generateStarkstreamConfig,
   generateTsConfig,
 } from "./templates";
 import type { Language } from "./types";
@@ -141,12 +141,15 @@ export async function initializeProject({
     consola.success("Created", cyan("tsconfig.json"));
   }
 
-  const apibaraConfigPath = path.join(root, `apibara.config.${configExt}`);
-  // Generate apibara.config
-  const apibaraConfig = generateApibaraConfig(isTs);
-  fs.writeFileSync(apibaraConfigPath, apibaraConfig);
-  await formatFile(apibaraConfigPath);
-  consola.success("Created", cyan(`apibara.config.${configExt}`));
+  const starkstreamConfigPath = path.join(
+    root,
+    `starkstream.config.${configExt}`,
+  );
+  // Generate starkstream.config
+  const starkstreamConfig = generateStarkstreamConfig(isTs);
+  fs.writeFileSync(starkstreamConfigPath, starkstreamConfig);
+  await formatFile(starkstreamConfigPath);
+  consola.success("Created", cyan(`starkstream.config.${configExt}`));
 
   // Create "indexers" directory if not exists
   const indexersDir = path.join(root, "indexers");

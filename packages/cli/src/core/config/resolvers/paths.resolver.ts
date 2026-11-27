@@ -1,7 +1,7 @@
-import type { ApibaraOptions } from "apibara/types";
 import { resolve } from "pathe";
+import type { StarkstreamOptions } from "starkstream/types";
 
-export async function resolvePathOptions(options: ApibaraOptions) {
+export async function resolvePathOptions(options: StarkstreamOptions) {
   options.rootDir = resolve(options.rootDir || ".");
 
   for (const key of ["buildDir"] as const) {
@@ -9,6 +9,6 @@ export async function resolvePathOptions(options: ApibaraOptions) {
   }
 
   if (!options.outputDir) {
-    options.outputDir = resolve(options.rootDir, ".apibara/build");
+    options.outputDir = resolve(options.rootDir, ".starkstream/build");
   }
 }

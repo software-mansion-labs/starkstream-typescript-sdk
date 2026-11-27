@@ -1,12 +1,12 @@
 import type { RolldownOptions } from "rolldown";
-import type { Apibara } from "./apibara";
+import type { Starkstream } from "./starkstream";
 
-export interface ApibaraHooks {
+export interface StarkstreamHooks {
   "rolldown:before": (
-    apibara: Apibara,
+    starkstream: Starkstream,
     rolldownConfig: RolldownOptions,
   ) => void;
-  compiled: (apibara: Apibara) => void;
+  compiled: (starkstream: Starkstream) => void;
   "dev:restart": () => Promise<void>;
   "dev:reload": () => Promise<void>;
   "rolldown:reload": () => Promise<void>;

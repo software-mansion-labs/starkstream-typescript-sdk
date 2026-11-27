@@ -1,12 +1,12 @@
-import { defineIndexer } from "@apibara/indexer";
-import { health } from "@apibara/plugin-health";
-import { StarknetStream } from "@apibara/starknet";
+import { defineIndexer } from "@starkstream/indexer";
+import { health } from "@starkstream/plugin-health";
+import { StarknetStream } from "@starkstream/starknet";
 import { hash } from "starknet";
 
 export default function (config) {
   console.log(config);
   return defineIndexer(StarknetStream)({
-    streamUrl: "https://mainnet.starknet.a5a.ch",
+    streamUrl: "https://mainnet.starkstream.io",
     finality: "pending",
     clientOptions: {
       channelOptions: {

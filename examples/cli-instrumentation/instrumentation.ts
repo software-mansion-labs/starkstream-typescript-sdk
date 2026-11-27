@@ -12,14 +12,14 @@ import {
   ATTR_SERVICE_NAME,
   ATTR_SERVICE_VERSION,
 } from "@opentelemetry/semantic-conventions";
-import { createLogger } from "apibara/runtime";
-import type { LoggerFactoryFn, RegisterFn } from "apibara/types";
+import { createLogger } from "starkstream/runtime";
+import type { LoggerFactoryFn, RegisterFn } from "starkstream/types";
 
 export const register: RegisterFn = async () => {
   // Create a resource that identifies your service
   const resource = defaultResource().merge(
     resourceFromAttributes({
-      [ATTR_SERVICE_NAME]: "apibara",
+      [ATTR_SERVICE_NAME]: "starkstream",
       [ATTR_SERVICE_VERSION]: "1.0.0",
     }),
   );
@@ -53,7 +53,7 @@ export const register: RegisterFn = async () => {
 
 // You can create a logger with any configuration you want which returns a ConsolaReporter
 export const logger: LoggerFactoryFn = ({ indexer, indexers, preset }) => {
-  // Below logger is just a small customized example of the default logger used by apibara
+  // Below logger is just a small customized example of the default logger used by starkstream
   return createLogger({
     indexer: `cli-${indexer}`,
     indexers,

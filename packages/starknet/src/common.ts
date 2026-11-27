@@ -1,4 +1,4 @@
-import type { Codec, CodecType } from "@apibara/protocol/codec";
+import type { Codec, CodecType } from "@starkstream/protocol/codec";
 import type * as proto from "./proto";
 
 const MAX_U64 = 0xffffffffffffffffn;

@@ -1,18 +1,18 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import virtual from "@rollup/plugin-virtual";
-import type { Apibara } from "apibara/types";
 import type { RolldownPluginOption } from "rolldown";
+import type { Starkstream } from "starkstream/types";
 
-export function instrumentation(apibara: Apibara) {
+export function instrumentation(starkstream: Starkstream) {
   const instrumentationPath = join(
-    apibara.options._c12.cwd!,
-    `instrumentation.${apibara.options._c12.configFile?.endsWith(".ts") ? "ts" : apibara.options._c12.configFile?.endsWith(".mjs") ? "mjs" : "js"}`,
+    starkstream.options._c12.cwd!,
+    `instrumentation.${starkstream.options._c12.configFile?.endsWith(".ts") ? "ts" : starkstream.options._c12.configFile?.endsWith(".mjs") ? "mjs" : "js"}`,
   );
 
   if (!existsSync(instrumentationPath)) {
     return virtual({
-      "#apibara-internal-virtual/instrumentation": `
+      "#starkstream-internal-virtual/instrumentation": `
       let register = undefined;
       let logger = undefined;
   
@@ -28,7 +28,7 @@ export function instrumentation(apibara: Apibara) {
    * Example warning:
    * 
    * [IMPORT_IS_UNDEFINED] Warning: Import `logger` will always be undefined because there is no matching export in 'instrumentation.ts'
-   *     ╭─[virtual:#apibara-internal-virtual/instrumentation:11:35]
+   *     ╭─[virtual:#starkstream-internal-virtual/instrumentation:11:35]
    *     │
    *  11 │     if (instrumentation && typeof instrumentation.logger === "function") {
    *     │                                   ───────────┬──────────  
@@ -36,7 +36,7 @@ export function instrumentation(apibara: Apibara) {
    * ────╯
 
   * [IMPORT_IS_UNDEFINED] Warning: Import `logger` will always be undefined because there is no matching export in 'instrumentation.ts'
-  *     ╭─[virtual:#apibara-internal-virtual/instrumentation:12:16]
+  *     ╭─[virtual:#starkstream-internal-virtual/instrumentation:12:16]
   *     │
   *  12 │       logger = instrumentation.logger;
   *     │                ───────────┬──────────  
@@ -44,7 +44,7 @@ export function instrumentation(apibara: Apibara) {
   * ────╯ 
   */
   return virtual({
-    "#apibara-internal-virtual/instrumentation": `
+    "#starkstream-internal-virtual/instrumentation": `
     let register = undefined;
     let logger = undefined;
 

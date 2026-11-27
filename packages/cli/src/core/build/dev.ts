@@ -1,26 +1,26 @@
-import type { Apibara } from "apibara/types";
 import { watch } from "chokidar";
 import defu from "defu";
 import { join } from "pathe";
 import { debounce } from "perfect-debounce";
 import * as rolldown from "rolldown";
+import type { Starkstream } from "starkstream/types";
 import { formatRolldownError } from "./error";
 
 export async function watchDev(
-  apibara: Apibara,
+  starkstream: Starkstream,
   rolldownConfig: rolldown.RolldownOptions,
 ) {
   let rolldownWatcher: rolldown.RolldownWatcher;
   async function load() {
-    apibara.logger.start("Setting up a dev server");
+    starkstream.logger.start("Setting up a dev server");
     if (rolldownWatcher) {
       await rolldownWatcher.close();
     }
-    rolldownWatcher = startRolldownWatcher(apibara, rolldownConfig);
+    rolldownWatcher = startRolldownWatcher(starkstream, rolldownConfig);
   }
   const reload = debounce(async () => await load());
 
-  const watchPatterns = getWatchPatterns(apibara);
+  const watchPatterns = getWatchPatterns(starkstream);
 
   const watchReloadEvents = new Set(["add", "addDir", "unlink", "unlinkDir"]);
   const reloadWatcher = watch(watchPatterns, { ignoreInitial: true }).on(
@@ -32,26 +32,26 @@ export async function watchDev(
     },
   );
 
-  apibara.hooks.hook("close", () => {
+  starkstream.hooks.hook("close", () => {
     rolldownWatcher.close();
     reloadWatcher.close();
   });
 
-  apibara.hooks.hook("rolldown:reload", async () => await reload());
+  starkstream.hooks.hook("rolldown:reload", async () => await reload());
 
   await load();
 }
 
 function startRolldownWatcher(
-  apibara: Apibara,
+  starkstream: Starkstream,
   rolldownConfig: rolldown.RolldownOptions,
 ) {
-  const ignorePatterns = getIgnorePatterns(apibara);
+  const ignorePatterns = getIgnorePatterns(starkstream);
   const watcher = rolldown.watch(
     defu(rolldownConfig, {
       watch: {
         exclude: ignorePatterns,
-        ...((apibara.options.watchOptions ?? {}) as rolldown.WatchOptions),
+        ...((starkstream.options.watchOptions ?? {}) as rolldown.WatchOptions),
       },
     }),
   );
@@ -61,7 +61,7 @@ function startRolldownWatcher(
     switch (event.code) {
       // The watcher is (re)starting
       case "START": {
-        await apibara.hooks.callHook("dev:restart");
+        await starkstream.hooks.callHook("dev:restart");
         return;
       }
 
@@ -73,35 +73,35 @@ function startRolldownWatcher(
 
       // Finished building all bundles
       case "END": {
-        apibara.hooks.callHook("compiled", apibara);
-        apibara.logger.success(
+        starkstream.hooks.callHook("compiled", starkstream);
+        starkstream.logger.success(
           "Indexers built",
           start ? `in ${Date.now() - start} ms` : "",
         );
-        await apibara.hooks.callHook("dev:reload");
+        await starkstream.hooks.callHook("dev:reload");
         return;
       }
 
       // Encountered an error while bundling
       case "ERROR": {
-        apibara.logger.error(formatRolldownError(event.error));
+        starkstream.logger.error(formatRolldownError(event.error));
       }
     }
   });
   return watcher;
 }
 
-const getWatchPatterns = (apibara: Apibara) => [
-  join(apibara.options.rootDir, "indexers"),
+const getWatchPatterns = (starkstream: Starkstream) => [
+  join(starkstream.options.rootDir, "indexers"),
 ];
 
-const getIgnorePatterns = (apibara: Apibara) => [
-  "**/.apibara/**",
+const getIgnorePatterns = (starkstream: Starkstream) => [
+  "**/.starkstream/**",
   "**/.git/**",
   "**/.DS_Store",
   "**/node_modules/**",
   "**/dist/**",
   "**/.turbo/**",
-  // changes to apibara.config is handled by c12 itself so we dont need rolldown to handle this
-  "**/apibara.config?(.ts|.js|.mjs)",
+  // changes to starkstream.config is handled by c12 itself so we dont need rolldown to handle this
+  "**/starkstream.config?(.ts|.js|.mjs)",
 ];

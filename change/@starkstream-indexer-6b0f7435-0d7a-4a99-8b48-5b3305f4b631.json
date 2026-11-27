@@ -1,7 +1,7 @@
 {
   "type": "none",
   "comment": "Use the Starknet Sepolia stream URL for mock indexers.",
-  "packageName": "@apibara/indexer",
+  "packageName": "@starkstream/indexer",
   "email": "makow.088@gmail.com",
   "dependentChangeType": "none"
 }

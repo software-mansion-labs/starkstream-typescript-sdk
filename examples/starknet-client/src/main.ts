@@ -1,12 +1,12 @@
 import assert from "node:assert";
-import { createAuthenticatedClient } from "@apibara/protocol";
-import type { CodecType } from "@apibara/protocol/codec";
+import { createAuthenticatedClient } from "@starkstream/protocol";
+import type { CodecType } from "@starkstream/protocol/codec";
 import {
   type Abi,
   type Filter,
   type FunctionInvocation,
   StarknetStream,
-} from "@apibara/starknet";
+} from "@starkstream/starknet";
 import { defineCommand, runMain } from "citty";
 import consola from "consola";
 
@@ -46,7 +46,7 @@ const command = defineCommand({
   args: {
     stream: {
       type: "string",
-      default: "https://mainnet.starknet.a5a.ch",
+      default: "https://mainnet.starkstream.io",
       description: "Starknet stream URL",
     },
     authToken: {
